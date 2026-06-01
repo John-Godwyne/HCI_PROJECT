@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="UnityHub — Centralized platform for community collaboration and resource sharing">
+  <title>Dashboard | UnityHub</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="sidebar-overlay" aria-hidden="true"></div>
+
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <div class="sidebar-logo">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <circle cx="24" cy="24" r="22" fill="#E8EAF6"/>
+          <circle cx="16" cy="20" r="6" fill="#3F51B5"/>
+          <circle cx="32" cy="20" r="6" fill="#5C6BC0"/>
+          <circle cx="24" cy="32" r="6" fill="#7986CB"/>
+        </svg>
+        <div>
+          <span>UnityHub</span>
+          <span class="sidebar-tagline">Connect. Collaborate. Create Impact.</span>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="index.html" class="nav-item active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Dashboard
+        </a>
+        <a href="events.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Events
+        </a>
+        <a href="resources.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          Resources
+        </a>
+        <a href="organization.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          Organizations
+        </a>
+        <a href="#" class="nav-item nav-item-messages">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          Messages
+        </a>
+        <a href="notifications.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+          Notifications
+        </a>
+        <a href="profile.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Profile
+        </a>
+        <a href="settings.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          Settings
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button type="button" class="btn-logout">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+          Logout
+        </button>
+      </div>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="topbar">
+        <button type="button" class="menu-toggle" aria-label="Open menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="search-bar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="search" id="global-search" placeholder="Search for events, organizations, or resources..." aria-label="Global search">
+        </div>
+        <div class="topbar-actions">
+          <a href="notifications.html" class="btn-icon" aria-label="Notifications" style="position:relative;text-decoration:none;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+            <span class="notification-dot" aria-hidden="true"></span>
+          </a>
+          <div class="user-profile">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop" alt="" class="user-avatar" width="40" height="40">
+            <div class="user-info">
+              <span class="user-name">Maria Santos</span>
+              <span class="user-role">Student</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="main-content">
+        <div class="dashboard-hero">
+          <div class="dashboard-greeting">
+            <h1 class="greeting-title" id="dashboard-greeting">Hello, Volunteer 👋</h1>
+            <p class="greeting-sub">Here's what's happening in your community today.</p>
+          </div>
+          <div class="impact-stats-row" aria-label="Your impact statistics">
+            <div class="impact-stat-pill">
+              <span class="impact-number" id="impact-events-count">0</span>
+              <span class="impact-label">Events Joined</span>
+            </div>
+            <div class="impact-divider" aria-hidden="true"></div>
+            <div class="impact-stat-pill">
+              <span class="impact-number" id="impact-resources-count">0</span>
+              <span class="impact-label">Resources Saved</span>
+            </div>
+            <div class="impact-divider" aria-hidden="true"></div>
+            <div class="impact-stat-pill">
+              <span class="impact-number" id="impact-orgs-count">3</span>
+              <span class="impact-label">Organizations</span>
+            </div>
+          </div>
+        </div>
+
+        <nav class="quick-access" aria-label="Quick access">
+          <a href="events.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
+            Events
+          </a>
+          <a href="resources.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+            Resources
+          </a>
+          <a href="organization.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            Orgs
+          </a>
+          <a href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            Messages
+          </a>
+        </nav>
+
+        <section class="dashboard-section" aria-labelledby="upcoming-heading">
+          <div class="section-header">
+            <h2 id="upcoming-heading" class="section-title">Upcoming Events</h2>
+            <a href="events.html" class="section-link">View all →</a>
+          </div>
+          <div class="events-grid-3 events-scroll">
+            <article class="event-card" data-event-id="event-coastal">
+              <a href="event-detail.html" class="event-card-link">
+                <div class="event-card-image">
+                  <img src="https://images.unsplash.com/photo-1618477817210-90a0dbfe90c7?w=600&h=400&fit=crop" alt="Beach cleanup volunteers">
+                  <span class="tag tag-environment">Environment</span>
+                </div>
+                <div class="event-card-body">
+                  <h3>Coastal Clean-up Drive</h3>
+                  <div class="event-meta">
+                    <span>📅 Jun 15, 2026 · 6:00 AM</span>
+                    <span>📍 Baywalk, Manila</span>
+                  </div>
+                </div>
+              </a>
+              <div class="event-card-footer">
+                <span class="badge badge-registered">Registered</span>
+                <div class="avatar-group">
+                  <img src="https://i.pravatar.cc/56?img=1" alt="">
+                  <img src="https://i.pravatar.cc/56?img=2" alt="">
+                  <img src="https://i.pravatar.cc/56?img=3" alt="">
+                  <span class="more">+23</span>
+                </div>
+              </div>
+            </article>
+            <article class="event-card" data-event-id="event-literacy">
+              <a href="event-detail.html" class="event-card-link">
+                <div class="event-card-image">
+                  <img src="https://images.unsplash.com/photo-1503676260728-1c1daef81d1b?w=600&h=400&fit=crop" alt="Students in workshop">
+                  <span class="tag tag-education">Education</span>
+                </div>
+                <div class="event-card-body">
+                  <h3>Literacy Workshop</h3>
+                  <div class="event-meta">
+                    <span>📅 Jun 20, 2026 · 2:00 PM</span>
+                    <span>📍 Barangay Hall, QC</span>
+                  </div>
+                </div>
+              </a>
+              <div class="event-card-footer">
+                <button type="button" class="btn btn-primary btn-sm" data-action="register">Register</button>
+                <div class="avatar-group">
+                  <img src="https://i.pravatar.cc/56?img=4" alt="">
+                  <img src="https://i.pravatar.cc/56?img=5" alt="">
+                  <span class="more">+18</span>
+                </div>
+              </div>
+            </article>
+            <article class="event-card" data-event-id="event-health">
+              <a href="event-detail.html" class="event-card-link">
+                <div class="event-card-image">
+                  <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=400&fit=crop" alt="Health outreach">
+                  <span class="tag tag-health">Health</span>
+                </div>
+                <div class="event-card-body">
+                  <h3>Community Health Fair</h3>
+                  <div class="event-meta">
+                    <span>📅 Jun 22, 2026 · 8:00 AM</span>
+                    <span>📍 Campus Gymnasium</span>
+                  </div>
+                </div>
+              </a>
+              <div class="event-card-footer">
+                <button type="button" class="btn btn-primary btn-sm" data-action="register">Register</button>
+                <div class="avatar-group">
+                  <span class="more">+45 going</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <div class="dashboard-bottom-grid dashboard-grid">
+          <section class="card" aria-labelledby="resources-heading">
+            <div class="section-header" style="padding: 1rem 1rem 0;">
+              <h2 id="resources-heading" class="section-title">Available Resources for You</h2>
+              <a href="resources.html" class="section-link">Browse</a>
+            </div>
+            <a href="resource-detail.html" class="resource-preview">
+              <img src="https://images.unsplash.com/photo-1593784991095-a205069470b6?w=200&h=160&fit=crop" alt="Projector">
+              <div>
+                <h4>HD Projector</h4>
+                <p>From: IT Society · Good condition · <span class="badge badge-available">Available</span></p>
+              </div>
+            </a>
+            <a href="resources.html" class="resource-preview">
+              <img src="https://images.unsplash.com/photo-1545454675-3531b543be6d?w=200&h=160&fit=crop" alt="Sound system">
+              <div>
+                <h4>Sound System</h4>
+                <p>From: Music Society · Good condition · <span class="badge badge-available">Available</span></p>
+              </div>
+            </a>
+          </section>
+
+          <section class="card" aria-labelledby="notif-heading">
+            <div class="section-header" style="padding: 1rem 1rem 0;">
+              <h2 id="notif-heading" class="section-title">Recent Notifications</h2>
+              <a href="notifications.html" class="section-link">See all</a>
+            </div>
+            <ul class="notification-list">
+              <li class="notification-item unread">
+                <div class="notification-icon">📅</div>
+                <div>
+                  <strong>Reminder: Coastal Clean-up</strong>
+                  <p>Your event starts in 2 days — don't forget gloves!</p>
+                </div>
+                <span class="notification-time">2h</span>
+              </li>
+              <li class="notification-item">
+                <div class="notification-icon">📦</div>
+                <div>
+                  <strong>Resource request approved</strong>
+                  <p>Music Society approved your sound system borrow request.</p>
+                </div>
+                <span class="notification-time">1d</span>
+              </li>
+              <li class="notification-item">
+                <div class="notification-icon">🤝</div>
+                <div>
+                  <strong>New partnership invite</strong>
+                  <p>Eco Warriors invited you to collaborate on a tree planting project.</p>
+                </div>
+                <span class="notification-time">3d</span>
+              </li>
+            </ul>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="modal-overlay" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
+    <div class="modal">
+      <h2 id="modal-title">Confirm</h2>
+      <p id="modal-body"></p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" id="modal-cancel">Cancel</button>
+        <button type="button" class="btn btn-primary" id="modal-confirm">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/ui-enhancements.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

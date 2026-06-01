@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up | UnityHub</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="auth-page">
+  <a href="landing.html" class="auth-logo">
+    <svg width="40" height="40" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" fill="#E8EAF6"/><circle cx="16" cy="20" r="6" fill="#3F51B5"/><circle cx="32" cy="20" r="6" fill="#5C6BC0"/><circle cx="24" cy="32" r="6" fill="#7986CB"/></svg>
+    <span>UnityHub</span>
+  </a>
+
+  <div class="auth-card" style="max-width: 460px;">
+    <h1>Create your account</h1>
+    <p class="auth-sub">Join thousands of students and organizations</p>
+
+    <form id="signup-form">
+      <div class="form-group">
+        <label for="signup-name">Full name</label>
+        <input type="text" id="signup-name" required placeholder="e.g. Juan dela Cruz" autocomplete="name">
+      </div>
+      <div class="form-group">
+        <label for="signup-email">Email address</label>
+        <input type="email" id="signup-email" required placeholder="you@email.com" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label for="signup-role">I am a...</label>
+        <select id="signup-role" required>
+          <option value="">Select role</option>
+          <option value="Student">Student</option>
+          <option value="Student Organization">Student Organization</option>
+          <option value="NSTP/CWTS Member">NSTP/CWTS Member</option>
+          <option value="Community Volunteer">Community Volunteer</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="signup-password">Password</label>
+        <input type="password" id="signup-password" required placeholder="At least 6 characters" autocomplete="new-password">
+        <div class="strength-bar" id="strength-bar"></div>
+        <span class="strength-label" id="strength-label"></span>
+      </div>
+      <div class="form-group">
+        <label for="signup-confirm">Confirm password</label>
+        <input type="password" id="signup-confirm" required placeholder="Re-enter password" autocomplete="new-password">
+      </div>
+      <div class="form-group">
+        <label style="display:flex;align-items:flex-start;gap:0.5rem;font-weight:400;cursor:pointer;">
+          <input type="checkbox" id="signup-terms" required style="margin-top:0.2rem;">
+          <span>I agree to the Terms of Service and Privacy Policy</span>
+        </label>
+      </div>
+      <button type="submit" class="btn btn-primary btn-full" id="signup-submit">Create Account</button>
+    </form>
+
+    <p class="auth-footer">Already have an account? <a href="login.html">Log In</a></p>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script>
+    if (UH.getCurrentUser()) window.location.href = 'index.html';
+
+    const form = document.getElementById('signup-form');
+    const nameInput = document.getElementById('signup-name');
+    const emailInput = document.getElementById('signup-email');
+    const roleInput = document.getElementById('signup-role');
+    const passwordInput = document.getElementById('signup-password');
+    const confirmInput = document.getElementById('signup-confirm');
+    const termsInput = document.getElementById('signup-terms');
+    const submitBtn = document.getElementById('signup-submit');
+    const strengthBar = document.getElementById('strength-bar');
+    const strengthLabel = document.getElementById('strength-label');
+
+    function clearErrors() {
+      document.querySelectorAll('.field-error').forEach((el) => el.remove());
+      [nameInput, emailInput, roleInput, passwordInput, confirmInput].forEach((i) => i.classList.remove('error'));
+    }
+
+    function showError(input, message) {
+      input.classList.add('error');
+      const err = document.createElement('p');
+      err.className = 'field-error';
+      err.innerHTML = '⚠ ' + message;
+      input.parentNode.appendChild(err);
+    }
+
+    passwordInput.addEventListener('input', () => {
+      const len = passwordInput.value.length;
+      strengthBar.className = 'strength-bar';
+      if (len === 0) {
+        strengthLabel.textContent = '';
+        return;
+      }
+      if (len < 6) {
+        strengthBar.classList.add('strength-weak');
+        strengthLabel.textContent = 'Weak password';
+      } else if (len < 10) {
+        strengthBar.classList.add('strength-fair');
+        strengthLabel.textContent = 'Fair password';
+      } else {
+        strengthBar.classList.add('strength-strong');
+        strengthLabel.textContent = 'Strong password';
+      }
+    });
+
+    [nameInput, emailInput, roleInput, passwordInput, confirmInput].forEach((input) => {
+      input.addEventListener('focus', () => {
+        const err = input.parentNode.querySelector('.field-error');
+        if (err) err.remove();
+        input.classList.remove('error');
+      });
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      clearErrors();
+
+      const name = nameInput.value.trim();
+      const email = emailInput.value.trim().toLowerCase();
+      const role = roleInput.value;
+      const password = passwordInput.value;
+      const confirm = confirmInput.value;
+      let valid = true;
+
+      if (!name) { showError(nameInput, 'Name is required.'); valid = false; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError(emailInput, 'Enter a valid email address.'); valid = false; }
+      if (!role) { showError(roleInput, 'Please select your role.'); valid = false; }
+      if (password.length < 6) { showError(passwordInput, 'Password must be at least 6 characters.'); valid = false; }
+      if (password !== confirm) { showError(confirmInput, 'Passwords do not match.'); valid = false; }
+      if (!termsInput.checked) { showError(termsInput.parentNode, 'You must agree to the terms.'); valid = false; }
+
+      const accounts = UH.getAccounts();
+      if (accounts.some((a) => a.email === email)) {
+        showError(emailInput, 'An account with this email already exists.');
+        valid = false;
+      }
+
+      if (!valid) return;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Creating account...';
+
+      setTimeout(() => {
+        const avatar = 'https://ui-avatars.com/api/?name=' + encodeURIComponent(name) + '&background=3F51B5&color=fff&size=80';
+        accounts.push({ name, email, password, role, avatar });
+        UH.saveAccounts(accounts);
+        UH.saveUser({ name, email, role, avatar });
+        window.location.href = 'index.html';
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log In | UnityHub</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="auth-page">
+  <a href="landing.html" class="auth-logo">
+    <svg width="40" height="40" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" fill="#E8EAF6"/><circle cx="16" cy="20" r="6" fill="#3F51B5"/><circle cx="32" cy="20" r="6" fill="#5C6BC0"/><circle cx="24" cy="32" r="6" fill="#7986CB"/></svg>
+    <span>UnityHub</span>
+  </a>
+
+  <div class="auth-card">
+    <h1>Welcome back</h1>
+    <p class="auth-sub">Log in to your account to continue</p>
+
+    <form id="login-form">
+      <div class="form-group">
+        <label for="login-email">Email address</label>
+        <input type="email" id="login-email" required placeholder="you@email.com" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label for="login-password">Password</label>
+        <input type="password" id="login-password" required placeholder="Enter your password" autocomplete="current-password">
+        <a href="#" class="forgot-link" id="forgot-password">Forgot password?</a>
+      </div>
+      <button type="submit" class="btn btn-primary btn-full" id="login-submit">Log In</button>
+    </form>
+
+    <p class="auth-divider">— or —</p>
+    <p class="auth-footer">Don't have an account? <a href="signup.html">Sign up</a></p>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script>
+    if (UH.getCurrentUser()) window.location.href = 'index.html';
+
+    const form = document.getElementById('login-form');
+    const emailInput = document.getElementById('login-email');
+    const passwordInput = document.getElementById('login-password');
+    const submitBtn = document.getElementById('login-submit');
+
+    function clearErrors() {
+      document.querySelectorAll('.field-error').forEach((el) => el.remove());
+      emailInput.classList.remove('error');
+      passwordInput.classList.remove('error');
+    }
+
+    function showError(input, message) {
+      clearErrors();
+      input.classList.add('error');
+      const err = document.createElement('p');
+      err.className = 'field-error';
+      err.innerHTML = '⚠ ' + message;
+      input.parentNode.appendChild(err);
+    }
+
+    emailInput.addEventListener('focus', clearErrors);
+    passwordInput.addEventListener('focus', clearErrors);
+
+    document.getElementById('forgot-password').addEventListener('click', (e) => {
+      e.preventDefault();
+      const t = document.createElement('div');
+      t.textContent = 'Password reset coming soon';
+      t.style.cssText = 'position:fixed;bottom:1.5rem;right:1.5rem;background:#1A1D2E;color:#fff;padding:0.85rem 1.25rem;border-radius:12px;font-size:0.875rem;z-index:9999;font-family:Poppins,sans-serif';
+      document.body.appendChild(t);
+      setTimeout(() => t.remove(), 3500);
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      clearErrors();
+      const email = emailInput.value.trim().toLowerCase();
+      const password = passwordInput.value;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Logging in...';
+
+      setTimeout(() => {
+        const demo = email === 'maria@student.ph' && password === 'password123';
+        if (demo) {
+          UH.saveUser({
+            name: 'Maria Santos',
+            email: 'maria@student.ph',
+            role: 'Student',
+            avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop',
+          });
+          window.location.href = 'index.html';
+          return;
+        }
+
+        const accounts = UH.getAccounts();
+        const account = accounts.find((a) => a.email.toLowerCase() === email);
+
+        if (!account) {
+          showError(emailInput, 'No account found with this email.');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Log In';
+          return;
+        }
+
+        if (account.password !== password) {
+          showError(passwordInput, 'Incorrect password.');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Log In';
+          return;
+        }
+
+        UH.saveUser({
+          name: account.name,
+          email: account.email,
+          role: account.role,
+          avatar: account.avatar || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(account.name) + '&background=3F51B5&color=fff&size=80',
+        });
+        window.location.href = 'index.html';
+      }, 800);
+    });
+  </script>
+</body>
+</html>

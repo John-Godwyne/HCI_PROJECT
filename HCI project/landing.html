@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UnityHub — Connect. Collaborate. Create Impact.</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <nav class="landing-nav">
+    <a href="landing.html" class="landing-nav-logo">
+      <svg width="36" height="36" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <circle cx="24" cy="24" r="22" fill="#E8EAF6"/>
+        <circle cx="16" cy="20" r="6" fill="#3F51B5"/>
+        <circle cx="32" cy="20" r="6" fill="#5C6BC0"/>
+        <circle cx="24" cy="32" r="6" fill="#7986CB"/>
+      </svg>
+      UnityHub
+    </a>
+    <div class="landing-nav-actions">
+      <a href="login.html" class="btn btn-outline btn-sm">Log In</a>
+      <a href="signup.html" class="btn btn-primary btn-sm">Get Started</a>
+    </div>
+  </nav>
+
+  <section class="landing-hero">
+    <h1>Connect. Collaborate. Create Impact.</h1>
+    <p>A centralized platform for students, organizations, and communities to discover events, share resources, and build meaningful partnerships.</p>
+    <div class="landing-hero-actions">
+      <a href="signup.html" class="btn-white">Get Started — It's Free</a>
+      <a href="events.html" class="btn-outline-white">Browse Events</a>
+    </div>
+    <p class="hero-trust">Trusted by 500+ students and 30+ organizations</p>
+  </section>
+
+  <section class="landing-features">
+    <h2>Everything you need to collaborate</h2>
+    <p class="section-sub">One place for campus and community engagement</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📅</div>
+        <h3>Event Board</h3>
+        <p>Discover and join community activities, workshops, and volunteer programs.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📦</div>
+        <h3>Resource Sharing</h3>
+        <p>Borrow equipment and materials from organizations near you.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤝</div>
+        <h3>Organization Profiles</h3>
+        <p>Connect with student orgs and community groups for partnerships.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="landing-how">
+    <h2>How UnityHub works</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3>Create your account</h3>
+        <p>Sign up as a student, organization, or volunteer.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3>Discover events &amp; resources</h3>
+        <p>Browse activities and available equipment.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3>Register, borrow, and collaborate</h3>
+        <p>Join events and request resources in one click.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="sdg-banner">🌍 Aligned with SDG 17 — Partnerships for the Goals</div>
+
+  <footer class="landing-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span>UnityHub</span>
+        <p>Connect. Collaborate. Create Impact.</p>
+      </div>
+      <div class="footer-links">
+        <a href="events.html">Events</a>
+        <a href="resources.html">Resources</a>
+        <a href="organization.html">Organizations</a>
+      </div>
+    </div>
+    <p class="footer-bottom">© 2026 UnityHub. Built for SDG 17.</p>
+  </footer>
+
+  <script src="js/storage.js"></script>
+  <script>
+    if (UH.getCurrentUser()) window.location.href = 'index.html';
+  </script>
+</body>
+</html>
