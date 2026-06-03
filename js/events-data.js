@@ -16,6 +16,7 @@
       location: 'Baywalk, Roxas Boulevard, Manila',
       participants: '45+ participants registered',
       organizer: 'Eco Warriors',
+      orgimage: 'https://i.pinimg.com/1200x/3e/45/e4/3e45e4ce0f35e9471fc50d6249f8eb85.jpg',
       about:
         'Join us for a morning coastal clean-up along Manila Baywalk. Help remove plastic waste and debris while learning about marine conservation. This activity supports SDG 14 (Life Below Water) and strengthens partnerships between students and local communities.',
       bring: [
@@ -82,7 +83,7 @@
     },
     'event-tree': {
       title: 'Tree Planting Initiative',
-      image: 'https://images.unsplash.com/photo-1464226184884-fa280b87b399?w=1200&h=500&fit=crop',
+      image: 'https://images.summitmedia-digital.com/spotph/images/2024/11/14/la-mesa-ecopark-trails-1731557240.jpg',
       imageAlt: 'Tree planting volunteers',
       tag: 'Environment',
       tagClass: 'tag-environment',
@@ -91,6 +92,7 @@
       location: 'La Mesa Eco Park',
       participants: '28+ participants registered',
       organizer: 'Eco Warriors',
+      orgimage: 'https://i.pinimg.com/1200x/3e/45/e4/3e45e4ce0f35e9471fc50d6249f8eb85.jpg',
       about:
         'Help restore green cover by planting native seedlings and maintaining trails. Brief orientation covers safety, species identification, and watershed stewardship.',
       bring: ['Closed shoes', 'Hat and sunscreen', 'Gloves (provided if needed)'],

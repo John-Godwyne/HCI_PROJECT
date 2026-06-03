@@ -222,6 +222,9 @@
 
     const organizerName = document.querySelector('.organizer-box strong a');
     if (organizerName) organizerName.textContent = event.organizer;
+
+    const organizerImg = document.querySelector('.organizer-box img');
+    if (organizerImg && event.orgimage) organizerImg.src = event.orgimage;
   }
 
   if (!isPublicPage) {
@@ -229,6 +232,7 @@
     initAppChrome();
     wireEventDetailLinks();
     initEventDetailPage();
+    initResourceDetailPage();
   }
 
   // Auth guard + dynamic user display
@@ -674,3 +678,65 @@
   updateEventsEmptyState();
   updateResourcesEmptyState();
 })();
+
+// Implementation for Resource Frontend
+
+function initResourceDetailPage() {
+  const page = window.location.pathname.split('/').pop() || 'index.html';
+if (page !== 'resource-detail.html' || !window.UnityHubResources) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const resourceId = params.get('id') || document.body.dataset.resourceId || UnityHubResources.defaultId;
+  const resource = UnityHubResources.getResource(resourceId);
+  if (!resource) return;
+
+  document.body.dataset.resourceId = resourceId;
+  document.title = `${resource.title} | UnityHub`;
+
+  const heroImg = document.querySelector('.detail-hero-wrap img');
+  if (heroImg) {
+    heroImg.src = resource.image;
+    heroImg.alt = resource.imageAlt;
+  }
+
+  const titleEl = document.querySelector('.detail-content h1');
+  if (titleEl) titleEl.textContent = resource.title;
+
+  const sections = document.querySelectorAll('.detail-content .detail-section');
+  const descP = sections[0]?.querySelector('p');
+  if (descP) descP.textContent = resource.description;
+
+  const guideList = sections[1]?.querySelector('ul');
+  if (guideList && resource.guidelines) {
+    guideList.innerHTML = resource.guidelines.map((g) => `<li>${g}</li>`).join('');
+  }
+
+  const meta = document.querySelector('.detail-meta');
+  if (meta) {
+    meta.innerHTML = [
+      `<span>📦 ${resource.condition}</span>`,
+      `<span>📅 ${resource.availability}</span>`,
+      `<span>🏷️ ${resource.category}</span>`,
+    ].join('');
+  }
+
+  const badgeEl = document.querySelector('.detail-sidebar-card .badge');
+  if (badgeEl) {
+    badgeEl.textContent = resource.badge;
+    badgeEl.className = `badge ${resource.badgeClass}`;
+  }
+
+  const fromName = document.querySelector('.organizer-box strong');
+  if (fromName) fromName.textContent = resource.from;
+
+  const fromImg = document.querySelector('.organizer-box img');
+  if (fromImg) fromImg.src = resource.fromImg;
+}
+
+ if (!isPublicPage) {
+    initSidebarNav();
+    initAppChrome();
+    wireEventDetailLinks();
+    initEventDetailPage();
+    initResourceDetailPage();
+  }
