@@ -6,10 +6,10 @@
   <title>Sign Up | UnityHub</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="auth-page">
+<body class="auth-page log">
   <a href="landing.html" class="auth-logo">
     <svg width="40" height="40" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" fill="#E8EAF6"/><circle cx="16" cy="20" r="6" fill="#3F51B5"/><circle cx="32" cy="20" r="6" fill="#5C6BC0"/><circle cx="24" cy="32" r="6" fill="#7986CB"/></svg>
-    <span>UnityHub</span>
+    <span style="color: white;">UnityHub</span>
   </a>
 
   <div class="auth-card" style="max-width: 460px;">
@@ -45,9 +45,9 @@
         <label for="signup-confirm">Confirm password</label>
         <input type="password" id="signup-confirm" required placeholder="Re-enter password" autocomplete="new-password">
       </div>
-      <div class="form-group">
-        <label style="display:flex;align-items:flex-start;gap:0.5rem;font-weight:400;cursor:pointer;">
-          <input type="checkbox" id="signup-terms" required style="margin-top:0.2rem;">
+          <div class="form-group">
+        <label class="form-check" for="signup-terms">
+          <input type="checkbox" id="signup-terms" required>
           <span>I agree to the Terms of Service and Privacy Policy</span>
         </label>
       </div>
