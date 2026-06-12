@@ -8,6 +8,7 @@
   
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
   <div class="sidebar-overlay"></div>
   <div class="app-shell">
     <aside class="sidebar" aria-label="Main navigation">
@@ -20,7 +21,7 @@
         <a href="events.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg> Events</a>
         <a href="resources.html" class="nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg> Resources</a>
         <a href="organization.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> Organizations</a>
-        <a href="#" class="nav-item nav-item-messages"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> Messages</a>
+        <a href="messages.html" class="nav-item nav-item-messages"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> Messages</a>
         <a href="notifications.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg> Notifications</a>
         <a href="profile.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Profile</a>
         <a href="settings.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/></svg> Settings</a>
@@ -31,12 +32,12 @@
     <div class="main-wrapper">
       <header class="topbar">
         <button type="button" class="menu-toggle" aria-label="Open menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/></svg></button>
-        <div class="search-bar">
+        <div class="search-bar" role="search">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/></svg>
-          <input type="search" id="global-search" placeholder="Search for events, organizations, or resources...">
+          <input type="search" id="global-search" placeholder="Search for events, organizations, or resources..." aria-label="Global search">
         </div>
         <div class="topbar-actions">
-          <a href="notifications.html" class="btn-icon" style="position:relative;text-decoration:none;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg><span class="notification-dot"></span></a>
+          <a href="notifications.html" class="btn-icon" aria-label="Notifications" style="position:relative;text-decoration:none;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg><span class="notification-dot" aria-hidden="true"></span></a>
           <a href="profile.html" class="user-profile">
             <img src="" alt="" class="user-avatar">
             <div class="user-info"><span class="user-name">User</span><span class="user-role">Role</span></div>
@@ -44,115 +45,186 @@
         </div>
       </header>
 
-      <main class="main-content">
+      <main id="main-content" class="main-content">
         <div class="resources-header">
           <header class="page-header">
             <h1>Resources</h1>
             <p>Borrow equipment and materials from student organizations and community groups.</p>
           </header>
-          <button type="button" class="btn btn-primary" onclick="UnityHub.showToast('Post a Resource — form coming in full version')">+ Post a Resource</button>
+          <button type="button" class="btn btn-primary" id="post-resource-btn">+ Share a Resource</button>
+        </div>
+
+        <div class="resources-filters-row">
+          <div class="resources-chips" role="group" aria-label="Filter by category">
+            <button type="button" class="filter-chip active" data-resource-filter="all">All Categories</button>
+            <button type="button" class="filter-chip" data-resource-filter="equipment">Equipment</button>
+            <button type="button" class="filter-chip" data-resource-filter="furniture">Furniture</button>
+            <button type="button" class="filter-chip" data-resource-filter="supplies">Supplies</button>
+            <button type="button" class="filter-chip" data-resource-filter="services">Services</button>
+          </div>
+          <div class="resources-sort">
+            <label for="resource-sort">Sort by</label>
+            <select id="resource-sort" aria-label="Sort resources">
+              <option value="newest">Newest First</option>
+              <option value="oldest">Oldest First</option>
+              <option value="name">Name A–Z</option>
+            </select>
+          </div>
         </div>
 
         <div class="resources-toolbar">
-          <input type="search" id="resource-search" placeholder="Search resources...">
-          <select id="resource-category" aria-label="Filter by category">
-            <option value="all">All Categories</option>
-            <option value="equipment">Equipment</option>
-            <option value="furniture">Furniture</option>
-            <option value="supplies">Supplies</option>
-            <option value="services">Services</option>
-          </select>
+          <input type="search" id="resource-search" placeholder="Search resources by name or organization..." aria-label="Search resources">
         </div>
 
         <div class="resources-grid">
-          <article class="resource-card" data-category="equipment" data-resource-id="res-projector">
+          <article class="resource-card" data-category="equipment" data-resource-id="res-projector" data-posted="1">
             <a href="resource-detail.html?id=res-projector">
               <div class="resource-card-image">
-                <img src="https://images.unsplash.com/photo-1593784991095-a205069470b6?w=400&h=260&fit=crop" alt="HD Projector">
-                <button type="button" class="bookmark-btn" aria-label="Save resource">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
-                </button>
+                <img loading="lazy" src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=400&h=260&fit=crop&crop=center" alt="HD projector on table showing a presentation">
               </div>
               <div class="resource-card-body">
+                <div class="resource-card-top">
+                  <span class="tag tag-equipment">Equipment</span>
+                  <span class="badge badge-available">Available</span>
+                </div>
                 <h3>HD Projector</h3>
-                <p class="resource-condition">Good condition · 3000 lumens</p>
-                <p class="resource-from">From: IT Society</p>
-                <span class="badge badge-available">Available</span>
+                <div class="resource-card-footer">
+                  <div class="org-attr">
+                    <div class="org-avatar-sm" aria-hidden="true">IS</div>
+                    <span>by <strong>IT Society</strong></span>
+                  </div>
+                  <div class="resource-card-meta">
+                    <span class="resource-posted">Posted 1 day ago</span>
+                    <button type="button" class="bookmark-btn" aria-label="Save resource" title="Save resource">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+                    </button>
+                  </div>
+                </div>
               </div>
             </a>
           </article>
 
-          <article class="resource-card" data-category="equipment" data-resource-id="res-sound">
+          <article class="resource-card" data-category="equipment" data-resource-id="res-sound" data-posted="3">
             <a href="resource-detail.html?id=res-sound">
               <div class="resource-card-image">
-                <img src="https://i.pinimg.com/736x/9d/c3/71/9dc371c3ae057f6a31b05a7a592cabdc.jpg" alt="Sound system">
-                <button type="button" class="bookmark-btn" aria-label="Save resource"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+                <img loading="lazy" src="https://images.unsplash.com/photo-1545454675-3531b543be5d?w=400&h=260&fit=crop" alt="Portable sound system speakers and mixer">
               </div>
               <div class="resource-card-body">
+                <div class="resource-card-top">
+                  <span class="tag tag-equipment">Equipment</span>
+                  <span class="badge badge-available">Available</span>
+                </div>
                 <h3>Sound System</h3>
-                <p class="resource-condition">Good condition · with 2 speakers</p>
-                <p class="resource-from">From: Music Society</p>
-                <span class="badge badge-available">Available</span>
+                <div class="resource-card-footer">
+                  <div class="org-attr">
+                    <div class="org-avatar-sm" aria-hidden="true">MS</div>
+                    <span>by <strong>Music Society</strong></span>
+                  </div>
+                  <div class="resource-card-meta">
+                    <span class="resource-posted">Posted 3 days ago</span>
+                    <button type="button" class="bookmark-btn" aria-label="Save resource"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+                  </div>
+                </div>
               </div>
             </a>
           </article>
 
-          <article class="resource-card" data-category="furniture" data-resource-id="res-tables">
+          <article class="resource-card" data-category="furniture" data-resource-id="res-tables" data-posted="7">
             <a href="resource-detail.html?id=res-tables">
               <div class="resource-card-image">
-                <img src="https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&h=260&fit=crop" alt="Folding tables">
-                <button type="button" class="bookmark-btn" aria-label="Save resource"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+                <img loading="lazy" src="https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&h=260&fit=crop" alt="Folding tables stacked in storage">
               </div>
               <div class="resource-card-body">
+                <div class="resource-card-top">
+                  <span class="tag tag-furniture">Furniture</span>
+                  <span class="badge badge-reserved">Reserved</span>
+                </div>
                 <h3>Folding Tables (set of 5)</h3>
-                <p class="resource-condition">Fair condition</p>
-                <p class="resource-from">From: Events Committee</p>
-                <span class="badge badge-available">Available</span>
+                <div class="resource-card-footer">
+                  <div class="org-attr">
+                    <div class="org-avatar-sm" aria-hidden="true">EC</div>
+                    <span>by <strong>Events Committee</strong></span>
+                  </div>
+                  <div class="resource-card-meta">
+                    <span class="resource-posted">Posted 1 week ago</span>
+                    <button type="button" class="bookmark-btn" aria-label="Save resource"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+                  </div>
+                </div>
               </div>
             </a>
           </article>
 
-          <article class="resource-card" data-category="furniture" data-resource-id="res-chairs">
+          <article class="resource-card" data-category="furniture" data-resource-id="res-chairs" data-posted="14">
             <a href="resource-detail.html?id=res-chairs">
               <div class="resource-card-image">
-                <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=260&fit=crop" alt="Plastic chairs">
-                <button type="button" class="bookmark-btn" aria-label="Save resource"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+                <img loading="lazy" src="https://i.pinimg.com/1200x/bb/2e/9d/bb2e9d35c8597ad3b2d1b91aaed6376d.jpg" alt="Rows of plastic chairs">
               </div>
               <div class="resource-card-body">
+                <div class="resource-card-top">
+                  <span class="tag tag-furniture">Furniture</span>
+                  <span class="badge badge-borrowed">Borrowed</span>
+                </div>
                 <h3>Plastic Chairs (20 pcs)</h3>
-                <p class="resource-condition">Good condition</p>
-                <p class="resource-from">From: NSTP Office</p>
-                <span class="badge badge-available">Available</span>
+                <div class="resource-card-footer">
+                  <div class="org-attr">
+                    <div class="org-avatar-sm" aria-hidden="true">NO</div>
+                    <span>by <strong>NSTP Office</strong></span>
+                  </div>
+                  <div class="resource-card-meta">
+                    <span class="resource-posted">Posted 2 weeks ago</span>
+                    <button type="button" class="bookmark-btn" aria-label="Save resource"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+                  </div>
+                </div>
               </div>
             </a>
           </article>
 
-          <article class="resource-card" data-category="supplies" data-resource-id="res-art">
+          <article class="resource-card" data-category="supplies" data-resource-id="res-art" data-posted="5">
             <a href="resource-detail.html?id=res-art">
               <div class="resource-card-image">
-                <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=400&h=260&fit=crop" alt="Art materials">
-                <button type="button" class="bookmark-btn" aria-label="Save resource"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+                <img loading="lazy" src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=400&h=260&fit=crop" alt="Art materials and brushes">
               </div>
               <div class="resource-card-body">
+                <div class="resource-card-top">
+                  <span class="tag tag-supplies">Supplies</span>
+                  <span class="badge badge-available">Available</span>
+                </div>
                 <h3>Art Materials Kit</h3>
-                <p class="resource-condition">New · paints, brushes, paper</p>
-                <p class="resource-from">From: Fine Arts Guild</p>
-                <span class="badge badge-available">Available</span>
+                <div class="resource-card-footer">
+                  <div class="org-attr">
+                    <div class="org-avatar-sm" aria-hidden="true">MC</div>
+                    <span>by <strong>Marketing Club</strong></span>
+                  </div>
+                  <div class="resource-card-meta">
+                    <span class="resource-posted">Posted 5 days ago</span>
+                    <button type="button" class="bookmark-btn" aria-label="Save resource"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+                  </div>
+                </div>
               </div>
             </a>
           </article>
 
-          <article class="resource-card" data-category="supplies" data-resource-id="res-cleaning">
+          <article class="resource-card" data-category="supplies" data-resource-id="res-cleaning" data-posted="2">
             <a href="resource-detail.html?id=res-cleaning">
               <div class="resource-card-image">
-                <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&h=260&fit=crop" alt="Cleaning supplies">
-                <button type="button" class="bookmark-btn" aria-label="Save resource"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+                <img loading="lazy" src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&h=260&fit=crop" alt="Cleaning supplies and buckets">
               </div>
               <div class="resource-card-body">
+                <div class="resource-card-top">
+                  <span class="tag tag-supplies">Supplies</span>
+                  <span class="badge badge-available">Available</span>
+                </div>
                 <h3>Cleaning Materials</h3>
-                <p class="resource-condition">Good condition · gloves, bags, tools</p>
-                <p class="resource-from">From: Eco Warriors</p>
-                <span class="badge badge-available">Available</span>
+                <div class="resource-card-footer">
+                  <div class="org-attr">
+                    <div class="org-avatar-sm" aria-hidden="true">EW</div>
+                    <span>by <strong>Eco Warriors</strong></span>
+                  </div>
+                  <div class="resource-card-meta">
+                    <span class="resource-posted">Posted 2 days ago</span>
+                    <button type="button" class="bookmark-btn" aria-label="Save resource"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+                  </div>
+                </div>
               </div>
             </a>
           </article>
@@ -165,7 +237,7 @@
     </div>
   </div>
 
-  <div id="modal-overlay" class="modal-overlay" aria-hidden="true" role="dialog">
+  <div id="modal-overlay" class="modal-overlay" aria-hidden="true" aria-modal="true" role="dialog">
     <div class="modal">
       <h2 id="modal-title">Confirm</h2>
       <p id="modal-body"></p>
@@ -175,6 +247,12 @@
       </div>
     </div>
   </div>
+  <button type="button" class="scroll-top-btn" id="scroll-top" aria-label="Scroll to top" style="display:none;">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <polyline points="18 15 12 9 6 15"/>
+    </svg>
+  </button>
+
   <script src="js/ui-icons.js"></script>
   <script src="js/resources-data.js"></script>
   <script src="js/events-data.js"></script>

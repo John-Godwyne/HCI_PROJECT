@@ -4,57 +4,91 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign Up | UnityHub</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css?v=4">
 </head>
 <body class="auth-page log">
-  <a href="landing.html" class="auth-logo">
-    <svg width="40" height="40" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" fill="#E8EAF6"/><circle cx="16" cy="20" r="6" fill="#3F51B5"/><circle cx="32" cy="20" r="6" fill="#5C6BC0"/><circle cx="24" cy="32" r="6" fill="#7986CB"/></svg>
-    <span style="color: white;">UnityHub</span>
-  </a>
 
-  <div class="auth-card" style="max-width: 460px;">
-    <h1>Create your account</h1>
-    <p class="auth-sub">Join thousands of students and organizations</p>
+  <div class="auth-split">
 
-    <form id="signup-form">
-      <div class="form-group">
-        <label for="signup-name">Full name</label>
-        <input type="text" id="signup-name" required placeholder="e.g. Juan dela Cruz" autocomplete="name">
+    <div class="auth-left">
+      <a href="landing.html" class="auth-left-logo">
+        <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="22" fill="rgba(255,255,255,0.15)"/>
+          <circle cx="16" cy="20" r="6" fill="white"/>
+          <circle cx="32" cy="20" r="6" fill="rgba(255,255,255,0.7)"/>
+          <circle cx="24" cy="32" r="6" fill="rgba(255,255,255,0.5)"/>
+        </svg>
+        <span>UnityHub</span>
+      </a>
+
+      <div class="auth-left-body">
+        <h2>Connect. Collaborate.<br>Create Impact.</h2>
+        <p>Join students and organizations building stronger communities through shared events and resources.</p>
       </div>
-      <div class="form-group">
-        <label for="signup-email">Email address</label>
-        <input type="email" id="signup-email" required placeholder="you@email.com" autocomplete="email">
+
+      <div class="auth-left-proof">
+        <div class="auth-proof-item">
+          <div class="auth-proof-icon">🎓</div>
+          <span><strong>500+</strong> students joined</span>
+        </div>
+        <div class="auth-proof-item">
+          <div class="auth-proof-icon">🏢</div>
+          <span><strong>30+</strong> organizations</span>
+        </div>
+        <div class="auth-proof-item">
+          <div class="auth-proof-icon">🌍</div>
+          <span>Aligned with <strong>SDG 17</strong></span>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="signup-role">I am a...</label>
-        <select id="signup-role" required>
-          <option value="">Select role</option>
-          <option value="Student">Student</option>
-          <option value="Student Organization">Student Organization</option>
-          <option value="NSTP/CWTS Member">NSTP/CWTS Member</option>
-          <option value="Community Volunteer">Community Volunteer</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="signup-password">Password</label>
-        <input type="password" id="signup-password" required placeholder="At least 6 characters" autocomplete="new-password">
-        <div class="strength-bar" id="strength-bar"></div>
-        <span class="strength-label" id="strength-label"></span>
-      </div>
-      <div class="form-group">
-        <label for="signup-confirm">Confirm password</label>
-        <input type="password" id="signup-confirm" required placeholder="Re-enter password" autocomplete="new-password">
-      </div>
+    </div>
+
+    <div class="auth-right">
+      <div class="auth-card" style="max-width: 460px;">
+        <h1>Create your account</h1>
+        <p class="auth-sub">Join thousands of students and organizations</p>
+
+        <form id="signup-form">
           <div class="form-group">
-        <label class="form-check" for="signup-terms">
-          <input type="checkbox" id="signup-terms" required>
-          <span>I agree to the Terms of Service and Privacy Policy</span>
-        </label>
-      </div>
-      <button type="submit" class="btn btn-primary btn-full" id="signup-submit">Create Account</button>
-    </form>
+            <label for="signup-name">Full name</label>
+            <input type="text" id="signup-name" required placeholder="e.g. Juan dela Cruz" autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label for="signup-email">Email address</label>
+            <input type="email" id="signup-email" required placeholder="you@email.com" autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="signup-role">I am a...</label>
+            <select id="signup-role" required>
+              <option value="">Select role</option>
+              <option value="Student">Student</option>
+              <option value="Student Organization">Student Organization</option>
+              <option value="NSTP/CWTS Member">NSTP/CWTS Member</option>
+              <option value="Community Volunteer">Community Volunteer</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="signup-password">Password</label>
+            <input type="password" id="signup-password" required placeholder="At least 6 characters" autocomplete="new-password">
+            <div class="strength-bar" id="strength-bar"></div>
+            <span class="strength-label" id="strength-label"></span>
+          </div>
+          <div class="form-group">
+            <label for="signup-confirm">Confirm password</label>
+            <input type="password" id="signup-confirm" required placeholder="Re-enter password" autocomplete="new-password">
+          </div>
+          <div class="form-group">
+            <label class="form-check" for="signup-terms">
+              <input type="checkbox" id="signup-terms" required>
+              <span>I agree to the Terms of Service and Privacy Policy</span>
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full" id="signup-submit">Create Account</button>
+        </form>
 
-    <p class="auth-footer">Already have an account? <a href="login.html">Log In</a></p>
+        <p class="auth-footer">Already have an account? <a href="login.html">Log In</a></p>
+      </div>
+    </div>
+
   </div>
 
   <script src="js/storage.js"></script>

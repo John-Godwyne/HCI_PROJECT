@@ -4,34 +4,67 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Log In | UnityHub</title>
-  <link rel="stylesheet" href="css/styles.css?v=3">
+  <link rel="stylesheet" href="css/styles.css?v=4">
 </head>
 <body class="auth-page log">
 
-  <a href="landing.html" class="auth-logo">
-    <svg width="40" height="40" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" fill="#E8EAF6"/><circle cx="16" cy="20" r="6" fill="#3F51B5"/><circle cx="32" cy="20" r="6" fill="#5C6BC0"/><circle cx="24" cy="32" r="6" fill="#7986CB"/></svg>
-    <span style="color: white;">UnityHub</span>
-  </a>
+  <div class="auth-split">
 
-  <div class="auth-card">
-    <h1>Welcome back</h1>
-    <p class="auth-sub">Log in to your account to continue</p>
+    <div class="auth-left">
+      <a href="landing.html" class="auth-left-logo">
+        <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="22" fill="rgba(255,255,255,0.15)"/>
+          <circle cx="16" cy="20" r="6" fill="white"/>
+          <circle cx="32" cy="20" r="6" fill="rgba(255,255,255,0.7)"/>
+          <circle cx="24" cy="32" r="6" fill="rgba(255,255,255,0.5)"/>
+        </svg>
+        <span>UnityHub</span>
+      </a>
 
-    <form id="login-form">
-      <div class="form-group">
-        <label for="login-email">Email address</label>
-        <input type="email" id="login-email" required placeholder="you@email.com" autocomplete="email">
+      <div class="auth-left-body">
+        <h2>Connect. Collaborate.<br>Create Impact.</h2>
+        <p>Join students and organizations building stronger communities through shared events and resources.</p>
       </div>
-      <div class="form-group">
-        <label for="login-password">Password</label>
-        <input type="password" id="login-password" required placeholder="Enter your password" autocomplete="current-password">
-        <a href="#" class="forgot-link" id="forgot-password">Forgot password?</a>
-      </div>
-      <button type="submit" class="btn btn-primary btn-full" id="login-submit">Log In</button>
-    </form>
 
-    <p class="auth-divider">— or —</p>
-    <p class="auth-footer">Don't have an account? <a href="signup.html">Sign up</a></p>
+      <div class="auth-left-proof">
+        <div class="auth-proof-item">
+          <div class="auth-proof-icon">🎓</div>
+          <span><strong>500+</strong> students joined</span>
+        </div>
+        <div class="auth-proof-item">
+          <div class="auth-proof-icon">🏢</div>
+          <span><strong>30+</strong> organizations</span>
+        </div>
+        <div class="auth-proof-item">
+          <div class="auth-proof-icon">🌍</div>
+          <span>Aligned with <strong>SDG 17</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="auth-right">
+      <div class="auth-card">
+        <h1>Welcome back</h1>
+        <p class="auth-sub">Log in to your account to continue</p>
+
+        <form id="login-form">
+          <div class="form-group">
+            <label for="login-email">Email address</label>
+            <input type="email" id="login-email" required placeholder="you@email.com" autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" required placeholder="Enter your password" autocomplete="current-password">
+            <a href="#" class="forgot-link" id="forgot-password">Forgot password?</a>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full" id="login-submit">Log In</button>
+        </form>
+
+        <p class="auth-divider">— or —</p>
+        <p class="auth-footer">Don't have an account? <a href="signup.html">Sign up</a></p>
+      </div>
+    </div>
+
   </div>
 
   <script src="js/storage.js"></script>
@@ -87,6 +120,10 @@
             email: 'maria@student.ph',
             role: 'Student',
             avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop',
+            phone: '+63 917 123 4567',
+            location: 'Quezon City, Philippines',
+            bio: 'Passionate about community service and making a positive impact through volunteer work.',
+            joinedAt: 'January 2026',
           });
           window.location.href = 'index.html';
           return;
@@ -114,6 +151,9 @@
           email: account.email,
           role: account.role,
           avatar: account.avatar || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(account.name) + '&background=3F51B5&color=fff&size=80',
+          phone: account.phone || '',
+          location: account.location || 'Quezon City, Philippines',
+          bio: account.bio || '',
         });
         window.location.href = 'index.html';
       }, 800);

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Settings | UnityHub</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css?v=4">
 </head>
 <body>
   <div class="sidebar-overlay"></div>
@@ -14,29 +14,22 @@
         <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" fill="#E8EAF6"/><circle cx="16" cy="20" r="6" fill="#3F51B5"/><circle cx="32" cy="20" r="6" fill="#5C6BC0"/><circle cx="24" cy="32" r="6" fill="#7986CB"/></svg>
         <div><span>UnityHub</span><span class="sidebar-tagline">Connect. Collaborate. Create Impact.</span></div>
       </div>
-      <nav class="sidebar-nav">
-        <a href="index.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg> Dashboard</a>
-        <a href="events.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/></svg> Events</a>
-        <a href="resources.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg> Resources</a>
-        <a href="organization.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> Organizations</a>
-        <a href="#" class="nav-item nav-item-messages"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> Messages</a>
-        <a href="notifications.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg> Notifications</a>
-        <a href="profile.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Profile</a>
-        <a href="settings.html" class="nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/></svg> Settings</a>
-      </nav>
+      <nav class="sidebar-nav"></nav>
       <div class="sidebar-footer">
-        <button type="button" class="btn-logout"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg> Logout</button>
+        <button type="button" class="btn-logout">Logout</button>
       </div>
     </aside>
 
     <div class="main-wrapper">
       <header class="topbar">
-        <button type="button" class="menu-toggle" aria-label="Open menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/></svg></button>
-        <div class="search-bar"><input type="search" id="global-search" placeholder="Search..."></div>
+        <button type="button" class="menu-toggle" aria-label="Open menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+        <div class="search-bar" role="search">
+          <input type="search" id="global-search" placeholder="Search for events, organizations, or resources...">
+        </div>
         <div class="topbar-actions">
-          <a href="notifications.html" class="btn-icon" style="position:relative;text-decoration:none;">
+          <a href="notifications.html" class="btn-icon" aria-label="Notifications" style="position:relative;text-decoration:none;">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>
-            <span class="notification-dot"></span>
+            <span class="notification-dot" aria-hidden="true"></span>
           </a>
           <a href="profile.html" class="user-profile" style="text-decoration:none;">
             <img src="" alt="" class="user-avatar">
@@ -51,49 +44,173 @@
           <p>Manage your account, notifications, and preferences.</p>
         </header>
 
-        <div class="card settings-section">
-          <h2>Change Password</h2>
-          <div class="form-group">
-            <label for="current-password">Current Password</label>
-            <input type="password" id="current-password">
-          </div>
-          <div class="form-group">
-            <label for="new-password">New Password</label>
-            <input type="password" id="new-password">
-          </div>
-          <div class="form-group">
-            <label for="confirm-password">Confirm New Password</label>
-            <input type="password" id="confirm-password">
-          </div>
-          <button type="button" class="btn btn-primary" id="save-password">Save Password</button>
-        </div>
+        <div class="settings-layout">
+          <nav class="settings-nav" aria-label="Settings sections">
+            <button type="button" class="settings-nav-item active" data-settings-panel="settings-account">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Account
+            </button>
+            <button type="button" class="settings-nav-item" data-settings-panel="settings-privacy">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+              Privacy
+            </button>
+            <button type="button" class="settings-nav-item" data-settings-panel="settings-notifications">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>
+              Notifications
+            </button>
+            <button type="button" class="settings-nav-item" data-settings-panel="settings-password">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+              Password
+            </button>
+            <button type="button" class="settings-nav-item" data-settings-panel="settings-appearance">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/></svg>
+              Appearance
+            </button>
+          </nav>
 
-        <div class="card settings-section">
-          <h2>Notifications</h2>
-          <div class="toggle-row">
-            <span class="toggle-label">Email notifications for new events</span>
-            <label class="toggle-switch"><input type="checkbox" id="toggle-email-events" checked><span class="toggle-slider"></span></label>
-          </div>
-          <div class="toggle-row">
-            <span class="toggle-label">Reminders before registered events</span>
-            <label class="toggle-switch"><input type="checkbox" id="toggle-reminders" checked><span class="toggle-slider"></span></label>
-          </div>
-          <div class="toggle-row">
-            <span class="toggle-label">Resource request updates</span>
-            <label class="toggle-switch"><input type="checkbox" id="toggle-resource" checked><span class="toggle-slider"></span></label>
-          </div>
-        </div>
+          <div class="settings-panels">
+            <!-- Account -->
+            <div id="settings-account" class="settings-panel active">
+              <div class="card">
+                <div class="settings-panel-header">
+                  <div>
+                    <h2>Account Information</h2>
+                    <p>Your personal details and contact information.</p>
+                  </div>
+                  <button type="button" class="btn btn-outline btn-sm" id="edit-account-btn">Edit</button>
+                </div>
+                <div id="account-view">
+                  <div class="settings-field-grid">
+                    <div class="settings-field"><label>Full Name</label><div class="field-value" id="view-name">—</div></div>
+                    <div class="settings-field"><label>Email Address</label><div class="field-value" id="view-email">—</div></div>
+                    <div class="settings-field"><label>Phone Number</label><div class="field-value" id="view-phone">—</div></div>
+                    <div class="settings-field"><label>Location</label><div class="field-value" id="view-location">—</div></div>
+                  </div>
+                </div>
+                <div id="account-edit" style="display:none;">
+                  <div class="settings-field-grid">
+                    <div class="settings-field"><label for="acct-name">Full Name</label><input type="text" id="acct-name"></div>
+                    <div class="settings-field"><label for="acct-email">Email Address</label><input type="email" id="acct-email" readonly></div>
+                    <div class="settings-field"><label for="acct-phone">Phone Number</label><input type="tel" id="acct-phone"></div>
+                    <div class="settings-field"><label for="acct-location">Location</label><input type="text" id="acct-location"></div>
+                  </div>
+                  <div class="settings-actions-row">
+                    <button type="button" class="btn btn-primary btn-sm" id="save-account">Save</button>
+                    <button type="button" class="btn btn-outline btn-sm" id="cancel-account">Cancel</button>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="settings-panel-header"><div><h2>Preferences</h2><p>Language and regional settings.</p></div></div>
+                <div class="settings-field-grid">
+                  <div class="settings-field">
+                    <label for="setting-language">Language</label>
+                    <select id="setting-language">
+                      <option value="en">English</option>
+                      <option value="fil">Filipino</option>
+                    </select>
+                  </div>
+                  <div class="settings-field">
+                    <label for="setting-timezone">Timezone</label>
+                    <select id="setting-timezone">
+                      <option value="Asia/Manila">Asia/Manila (GMT+8)</option>
+                      <option value="Asia/Singapore">Asia/Singapore (GMT+8)</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-        <div class="danger-zone">
-          <h3>Delete Account</h3>
-          <p>Permanently delete your account and all associated data. This cannot be undone.</p>
-          <button type="button" class="btn-danger" id="delete-account-btn">Delete Account</button>
+            <!-- Privacy -->
+            <div id="settings-privacy" class="settings-panel">
+              <div class="card">
+                <div class="settings-panel-header"><div><h2>Privacy Settings</h2><p>Control who can see your profile and activity.</p></div></div>
+                <div class="toggle-row">
+                  <span class="toggle-label">Make my profile visible to organizations</span>
+                  <label class="toggle-switch"><input type="checkbox" id="toggle-profile-visible" checked><span class="toggle-slider"></span></label>
+                </div>
+                <div class="toggle-row">
+                  <span class="toggle-label">Show my activity on community feed</span>
+                  <label class="toggle-switch"><input type="checkbox" id="toggle-show-activity" checked><span class="toggle-slider"></span></label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Notifications -->
+            <div id="settings-notifications" class="settings-panel">
+              <div class="card">
+                <div class="settings-panel-header"><div><h2>Notification Preferences</h2><p>Choose how you want to be notified.</p></div></div>
+                <div class="toggle-row">
+                  <span class="toggle-label">Email notifications for new events</span>
+                  <label class="toggle-switch"><input type="checkbox" id="toggle-email-events" checked><span class="toggle-slider"></span></label>
+                </div>
+                <div class="toggle-row">
+                  <span class="toggle-label">Push notifications</span>
+                  <label class="toggle-switch"><input type="checkbox" id="toggle-push" checked><span class="toggle-slider"></span></label>
+                </div>
+                <div class="toggle-row">
+                  <span class="toggle-label">Reminders before registered events</span>
+                  <label class="toggle-switch"><input type="checkbox" id="toggle-reminders" checked><span class="toggle-slider"></span></label>
+                </div>
+                <div class="toggle-row">
+                  <span class="toggle-label">Resource request updates</span>
+                  <label class="toggle-switch"><input type="checkbox" id="toggle-resource" checked><span class="toggle-slider"></span></label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Password -->
+            <div id="settings-password" class="settings-panel">
+              <div class="card">
+                <div class="settings-panel-header"><div><h2>Change Password</h2><p>Update your password to keep your account secure.</p></div></div>
+                <div class="settings-field full-width">
+                  <label for="current-password">Current Password</label>
+                  <input type="password" id="current-password" autocomplete="current-password">
+                </div>
+                <div class="settings-field-grid" style="margin-top:1rem;">
+                  <div class="settings-field"><label for="new-password">New Password</label><input type="password" id="new-password" autocomplete="new-password"></div>
+                  <div class="settings-field"><label for="confirm-password">Confirm New Password</label><input type="password" id="confirm-password" autocomplete="new-password"></div>
+                </div>
+                <div class="settings-actions-row">
+                  <button type="button" class="btn btn-primary" id="save-password">Save Password</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Appearance -->
+            <div id="settings-appearance" class="settings-panel">
+              <div class="card">
+                <div class="settings-panel-header"><div><h2>Appearance</h2><p>Customize how UnityHub looks for you.</p></div></div>
+                <div class="appearance-options">
+                  <button type="button" class="appearance-option active" data-theme="light">
+                    <div class="appearance-preview light"></div>
+                    <span>Light</span>
+                  </button>
+                  <button type="button" class="appearance-option" data-theme="dark">
+                    <div class="appearance-preview dark"></div>
+                    <span>Dark</span>
+                  </button>
+                </div>
+                <p style="font-size:0.8rem;color:var(--text-muted);margin-top:1rem;">Dark mode is coming in a future update. Your preference will be saved.</p>
+              </div>
+            </div>
+
+            <!-- Danger zone (always visible at bottom) -->
+            <div class="danger-zone">
+              <h3>Danger Zone</h3>
+              <p>Irreversible actions that affect your account and data.</p>
+              <div class="danger-zone-actions">
+                <button type="button" class="btn-danger-outline" id="logout-all-btn">Log out from all devices</button>
+                <button type="button" class="btn-danger" id="delete-account-btn">Delete Account</button>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
     </div>
   </div>
 
-  <div id="modal-overlay" class="modal-overlay" aria-hidden="true" role="dialog">
+  <div id="modal-overlay" class="modal-overlay" aria-hidden="true" aria-modal="true" role="dialog">
     <div class="modal">
       <h2 id="modal-title">Delete Account</h2>
       <p id="modal-body">Are you sure? This will permanently delete your account and all data. This cannot be undone.</p>
@@ -104,6 +221,10 @@
     </div>
   </div>
 
+  <button type="button" class="scroll-top-btn" id="scroll-top" aria-label="Scroll to top" style="display:none;">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
   <script src="js/ui-icons.js"></script>
   <script src="js/events-data.js"></script>
   <script src="js/storage.js"></script>
@@ -111,37 +232,119 @@
   <script src="js/app.js"></script>
   <script>
     const settings = UH.getSettings();
+    const user = UH.ensureProfileFields(UH.getCurrentUser());
+
+    document.getElementById('view-name').textContent = user.name;
+    document.getElementById('view-email').textContent = user.email;
+    document.getElementById('view-phone').textContent = user.phone || 'Not set';
+    document.getElementById('view-location').textContent = user.location;
+
     document.getElementById('toggle-email-events').checked = settings.emailEvents;
     document.getElementById('toggle-reminders').checked = settings.eventReminders;
     document.getElementById('toggle-resource').checked = settings.resourceUpdates;
+    document.getElementById('toggle-push').checked = settings.pushNotifications;
+    document.getElementById('toggle-profile-visible').checked = settings.profileVisible;
+    document.getElementById('toggle-show-activity').checked = settings.showActivity;
+    document.getElementById('setting-language').value = settings.language;
+    document.getElementById('setting-timezone').value = settings.timezone;
 
-    function saveToggles() {
+    function saveAllSettings() {
       UH.saveSettings({
         emailEvents: document.getElementById('toggle-email-events').checked,
         eventReminders: document.getElementById('toggle-reminders').checked,
         resourceUpdates: document.getElementById('toggle-resource').checked,
+        pushNotifications: document.getElementById('toggle-push').checked,
+        profileVisible: document.getElementById('toggle-profile-visible').checked,
+        showActivity: document.getElementById('toggle-show-activity').checked,
+        language: document.getElementById('setting-language').value,
+        timezone: document.getElementById('setting-timezone').value,
+        theme: document.querySelector('.appearance-option.active')?.dataset.theme || 'light',
       });
     }
 
-    ['toggle-email-events', 'toggle-reminders', 'toggle-resource'].forEach((id) => {
-      document.getElementById(id).addEventListener('change', saveToggles);
+    ['toggle-email-events', 'toggle-reminders', 'toggle-resource', 'toggle-push', 'toggle-profile-visible', 'toggle-show-activity'].forEach(function(id) {
+      document.getElementById(id).addEventListener('change', function() {
+        saveAllSettings();
+        if (UnityHub.showToast) UnityHub.showToast('Settings saved', 'success');
+      });
     });
 
-    document.getElementById('save-password').addEventListener('click', () => {
-      const user = UH.getCurrentUser();
+    ['setting-language', 'setting-timezone'].forEach(function(id) {
+      document.getElementById(id).addEventListener('change', function() {
+        saveAllSettings();
+        if (UnityHub.showToast) UnityHub.showToast('Preferences updated', 'success');
+      });
+    });
+
+    document.querySelectorAll('.appearance-option').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.appearance-option').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        saveAllSettings();
+        if (btn.dataset.theme === 'dark') {
+          UnityHub.showToast('Dark mode coming soon — preference saved.');
+        } else {
+          UnityHub.showToast('Theme preference saved.', 'success');
+        }
+      });
+    });
+
+    if (settings.theme === 'dark') {
+      document.querySelector('.appearance-option[data-theme="dark"]')?.classList.add('active');
+      document.querySelector('.appearance-option[data-theme="light"]')?.classList.remove('active');
+    }
+
+    document.getElementById('edit-account-btn').addEventListener('click', function() {
+      document.getElementById('acct-name').value = user.name;
+      document.getElementById('acct-email').value = user.email;
+      document.getElementById('acct-phone').value = user.phone || '';
+      document.getElementById('acct-location').value = user.location || '';
+      document.getElementById('account-view').style.display = 'none';
+      document.getElementById('account-edit').style.display = 'block';
+      document.getElementById('edit-account-btn').style.display = 'none';
+    });
+
+    document.getElementById('cancel-account').addEventListener('click', function() {
+      document.getElementById('account-view').style.display = 'block';
+      document.getElementById('account-edit').style.display = 'none';
+      document.getElementById('edit-account-btn').style.display = '';
+    });
+
+    document.getElementById('save-account').addEventListener('click', function() {
+      UH.updateUser({
+        name: document.getElementById('acct-name').value.trim(),
+        phone: document.getElementById('acct-phone').value.trim(),
+        location: document.getElementById('acct-location').value.trim(),
+      });
+      const updated = UH.ensureProfileFields(UH.getCurrentUser());
+      document.getElementById('view-name').textContent = updated.name;
+      document.getElementById('view-phone').textContent = updated.phone || 'Not set';
+      document.getElementById('view-location').textContent = updated.location;
+      document.getElementById('cancel-account').click();
+      document.querySelectorAll('.user-name').forEach(function(el) { el.textContent = updated.name; });
+      UnityHub.showToast('Account updated.', 'success');
+    });
+
+    document.getElementById('save-password').addEventListener('click', function() {
+      const currentUser = UH.getCurrentUser();
       const current = document.getElementById('current-password').value;
       const newPass = document.getElementById('new-password').value;
       const confirm = document.getElementById('confirm-password').value;
-
       const accounts = UH.getAccounts();
-      const account = accounts.find((a) => a.email === user.email);
+      const account = accounts.find(function(a) { return a.email === currentUser.email; });
 
-      if (user.email === 'maria@student.ph' && current !== 'password123') {
-        UnityHub.showToast('Current password is incorrect.');
-        return;
-      }
-      if (account && account.password !== current) {
-        UnityHub.showToast('Current password is incorrect.');
+      if (currentUser.email === 'maria@student.ph') {
+        if (current !== 'password123') {
+          UnityHub.showToast('Current password is incorrect.');
+          return;
+        }
+      } else if (account) {
+        if (account.password !== current) {
+          UnityHub.showToast('Current password is incorrect.');
+          return;
+        }
+      } else {
+        UnityHub.showToast('Password change is not available for this account.');
         return;
       }
       if (newPass.length < 6) {
@@ -152,7 +355,6 @@
         UnityHub.showToast('Passwords do not match.');
         return;
       }
-
       if (account) {
         account.password = newPass;
         UH.saveAccounts(accounts);
@@ -163,16 +365,20 @@
       document.getElementById('confirm-password').value = '';
     });
 
+    document.getElementById('logout-all-btn').addEventListener('click', function() {
+      UnityHub.showToast('Logged out from all other devices.', 'success');
+    });
+
     const modal = document.getElementById('modal-overlay');
-    document.getElementById('delete-account-btn').addEventListener('click', () => {
+    document.getElementById('delete-account-btn').addEventListener('click', function() {
       modal.classList.add('open');
       modal.setAttribute('aria-hidden', 'false');
     });
-    document.getElementById('modal-cancel').addEventListener('click', () => {
+    document.getElementById('modal-cancel').addEventListener('click', function() {
       modal.classList.remove('open');
       modal.setAttribute('aria-hidden', 'true');
     });
-    document.getElementById('modal-confirm-delete').addEventListener('click', () => {
+    document.getElementById('modal-confirm-delete').addEventListener('click', function() {
       UH.clearAllData();
       window.location.href = 'landing.html';
     });

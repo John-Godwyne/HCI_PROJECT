@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eco Warriors | UnityHub</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <title>Organizations | UnityHub</title>
+  <link rel="stylesheet" href="css/styles.css?v=4">
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
   <div class="sidebar-overlay"></div>
   <div class="app-shell">
     <aside class="sidebar" aria-label="Main navigation">
@@ -16,10 +17,10 @@
       </div>
       <nav class="sidebar-nav">
         <a href="index.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg> Dashboard</a>
-        <a href="events.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg> Events</a>
+        <a href="events.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg> Events</a>
         <a href="resources.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg> Resources</a>
         <a href="organization.html" class="nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> Organizations</a>
-        <a href="#" class="nav-item nav-item-messages"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> Messages</a>
+        <a href="messages.html" class="nav-item nav-item-messages"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> Messages</a>
         <a href="notifications.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg> Notifications</a>
         <a href="profile.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Profile</a>
         <a href="settings.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/></svg> Settings</a>
@@ -29,12 +30,12 @@
 
     <div class="main-wrapper">
       <header class="topbar">
-        <button type="button" class="menu-toggle" aria-label="Open menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/></svg></button>
-        <div class="search-bar">
+        <button type="button" class="menu-toggle" aria-label="Open menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+        <div class="search-bar" role="search">
           <input type="search" id="global-search" placeholder="Search for events, organizations, or resources...">
         </div>
         <div class="topbar-actions">
-          <a href="notifications.html" class="btn-icon" style="position:relative;text-decoration:none;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg><span class="notification-dot"></span></a>
+          <a href="notifications.html" class="btn-icon" aria-label="Notifications" style="position:relative;text-decoration:none;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg><span class="notification-dot" aria-hidden="true"></span></a>
           <a href="profile.html" class="user-profile">
             <img src="" alt="" class="user-avatar">
             <div class="user-info"><span class="user-name">User</span><span class="user-role">Role</span></div>
@@ -42,118 +43,282 @@
         </div>
       </header>
 
-      <main class="main-content org-profile">
-        <div class="card" style="padding: 0; overflow: visible;">
-          <div class="org-cover" style="background-image: url('https://i.pinimg.com/736x/cd/c6/c4/cdc6c4dfd790ae3199023f95a805dcc2.jpg');" role="img" aria-label="Volunteers planting trees"></div>
-          <div class="org-header">
-            <div class="org-logo-row">
-              <img src="https://i.pinimg.com/1200x/3e/45/e4/3e45e4ce0f35e9471fc50d6249f8eb85.jpg" alt="Eco Warriors logo" class="org-logo">
-              <div class="org-title">
-                <h1>Eco Warriors</h1>
-                <p>📍 Campus · Environment & Sustainability</p>
-                <div style="margin-top: 0.5rem;">
-                  <span class="tag tag-environment">Environment</span>
-                  <span class="tag tag-community" style="margin-left: 0.35rem;">Community</span>
+      <main id="main-content" class="main-content">
+        <div class="orgs-directory" id="orgs-directory">
+          <div class="page-header">
+            <h1>Organizations</h1>
+            <p>Connect with student orgs and community groups on UnityHub.</p>
+          </div>
+
+          <div class="orgs-toolbar">
+            <input type="search" id="org-search" placeholder="Search organizations..." aria-label="Search organizations">
+          </div>
+
+          <div class="orgs-grid">
+            <button type="button" class="org-card-btn" data-org="eco-warriors">
+  <div class="org-card">
+    <div class="org-card-cover" style="background: linear-gradient(135deg,#059669,#0D9488);">
+      <div class="org-card-avatar" style="background:#D1FAE5;color:#065F46;">
+        <img src="https://i.pinimg.com/1200x/3e/45/e4/3e45e4ce0f35e9471fc50d6249f8eb85.jpg">
+      </div>
+    </div>
+    <div class="org-card-body">
+      <h3>Eco Warriors</h3>
+      <p>Environmental advocacy and sustainable community action.</p>
+      <div style="display:flex;gap:0.4rem;margin-top:0.5rem;flex-wrap:wrap;">
+        <span class="tag tag-environment">Environment</span>
+        <span class="tag tag-community">Community</span>
+      </div>
+      <div class="org-card-stats">
+        <span>120+ volunteers</span>
+        <span>·</span>
+        <span>15 projects</span>
+      </div>
+    </div>
+  </div>
+</button>
+
+            <button type="button" class="org-card-btn" data-org="it-society">
+              <div class="org-card">
+                <div class="org-card-cover" style="background: linear-gradient(135deg,#4F46E5,#6366F1);">
+                  <div class="org-card-avatar" style="background:#EEF2FF;color:#3730A3;">
+                    <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=96&h=96&fit=crop">
+                  </div>
+                </div>
+                <div class="org-card-body">
+                  <h3>IT Society</h3>
+                  <p>Tech workshops, digital literacy programs, and equipment sharing for the campus community.</p>
+                  <div style="display:flex;gap:0.4rem;margin-top:0.5rem;">
+                    <span class="tag tag-education">Education</span>
+                  </div>
+                  <div class="org-card-stats">
+                    <span>85 members</span>
+                    <span>·</span>
+                    <span>8 projects</span>
+                  </div>
                 </div>
               </div>
-              <div class="org-actions">
-                <button type="button" class="btn btn-primary" data-action="message">Message</button>
+            </button>
+
+            <button type="button" class="org-card-btn" data-org="health-alliance">
+              <div class="org-card">
+                <div class="org-card-cover" style="background: linear-gradient(135deg,#DC2626,#EF4444);">
+                  <div class="org-card-avatar" style="background:#FEE2E2;color:#991B1B;">
+                    HA
+                  </div>
+                </div>
+                <div class="org-card-body">
+                  <h3>Health Alliance</h3>
+                  <p>Free medical missions, health fairs, and wellness programs for students and communities.</p>
+                  <div style="display:flex;gap:0.4rem;margin-top:0.5rem;">
+                    <span class="tag tag-health">Health</span>
+                  </div>
+                  <div class="org-card-stats">
+                    <span>60 volunteers</span>
+                    <span>·</span>
+                    <span>10 projects</span>
+                  </div>
+                </div>
               </div>
-            </div>
+            </button>
+
+            <button type="button" class="org-card-btn" data-org="nstp-office">
+              <div class="org-card">
+                <div class="org-card-cover" style="background: linear-gradient(135deg,#7C3AED,#8B5CF6);">
+                  <div class="org-card-avatar" style="background:#EDE9FE;color:#5B21B6;">NO</div>
+                </div>
+                <div class="org-card-body">
+                  <h3>NSTP Office</h3>
+                  <p>National Service Training Program coordinating community outreach and civic engagement.</p>
+                  <div style="display:flex;gap:0.4rem;margin-top:0.5rem;">
+                    <span class="tag tag-community">Community</span>
+                  </div>
+                  <div class="org-card-stats">
+                    <span>200+ students</span>
+                    <span>·</span>
+                    <span>20 projects</span>
+                  </div>
+                </div>
+              </div>
+            </button>
           </div>
         </div>
 
-        <div class="tabs" role="tablist">
-          <button type="button" class="tab active" role="tab" aria-selected="true" data-tab="tab-about">About</button>
-          <button type="button" class="tab" role="tab" aria-selected="false" data-tab="tab-projects">Projects</button>
-          <button type="button" class="tab" role="tab" aria-selected="false" data-tab="tab-resources">Resources</button>
-          <button type="button" class="tab" role="tab" aria-selected="false" data-tab="tab-members">Members</button>
-        </div>
+        <div class="org-profile-view" id="org-profile-view" style="display:none;">
+          <button type="button" class="detail-back btn org-back-btn" id="org-back-btn">← Back to Organizations</button>
 
-        <div id="tab-about" class="tab-panel active" role="tabpanel">
-          <p class="about-text">
-            Eco Warriors is a student-led organization dedicated to environmental advocacy and sustainable community action. We organize coastal clean-ups, tree planting drives, and recycling campaigns in partnership with barangay youth groups and campus offices. Our mission is to connect students with meaningful volunteer opportunities while promoting efficient use of shared resources across organizations.
-          </p>
-          <div class="stats-grid">
-            <div class="stat-card">
-              <strong>15</strong>
-              <span>Active Projects</span>
+          <!-- Eco Warriors -->
+          <div class="org-profile-panel" data-org-panel="eco-warriors" data-org-id="eco-warriors">
+            <div class="card org-hero-card">
+              <div class="org-hero-inner">
+                <div class="org-hero-identity">
+                  <div class="org-hero-logo" style="background:#D1FAE5;color:#065F46;">
+                    <img src='https://i.pinimg.com/1200x/3e/45/e4/3e45e4ce0f35e9471fc50d6249f8eb85.jpg' >
+                  </div>
+                  <div>
+                    <div class="org-name-row">
+                      <h1>Eco Warriors</h1>
+                      <span class="verified-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Verified</span>
+                    </div>
+                    <p class="org-hero-tagline">Environmental advocacy and sustainable community action for campus and barangay partners.</p>
+                    <div class="org-hero-meta">
+                      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Campus, Quezon City</span>
+                      <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg> ecowarriors.org</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="org-hero-aside">
+                  <div class="org-hero-stats">
+                    <div class="org-stat-block"><strong>120+</strong><span>Members</span></div>
+                    <div class="org-stat-block"><strong>15</strong><span>Projects</span></div>
+                    <div class="org-stat-block"><strong>8</strong><span>Partnerships</span></div>
+                  </div>
+                  <button type="button" class="btn btn-primary btn-follow" data-org-id="eco-warriors" data-action="follow">Follow</button>
+                </div>
+              </div>
             </div>
-            <div class="stat-card">
-              <strong>120+</strong>
-              <span>Volunteers</span>
+            <div class="tabs" role="tablist">
+              <button type="button" class="tab active" role="tab" aria-selected="true" data-tab="ew-about">About</button>
+              <button type="button" class="tab" role="tab" aria-selected="false" data-tab="ew-projects">Projects</button>
+              <button type="button" class="tab" role="tab" aria-selected="false" data-tab="ew-resources">Resources</button>
+              <button type="button" class="tab" role="tab" aria-selected="false" data-tab="ew-members">Members</button>
+              <button type="button" class="tab" role="tab" aria-selected="false" data-tab="ew-updates">Updates</button>
             </div>
-            <div class="stat-card">
-              <strong>8</strong>
-              <span>Resources Shared</span>
+            <div class="org-content-grid" data-org-grid="eco-warriors">
+              <div class="org-main-col">
+                <div id="ew-about" class="tab-panel active" role="tabpanel">
+                  <div class="content-section"><h2>About</h2><p class="about-text">Eco Warriors is a student-led organization dedicated to environmental advocacy and sustainable community action. We organize coastal clean-ups, tree planting drives, and recycling campaigns in partnership with barangay youth groups and campus offices across Metro Manila.</p></div>
+                  <div class="content-section"><h2>Our Mission</h2><p class="about-text">To empower students and communities to take meaningful action for the environment through education, volunteerism, and sustainable practices that create lasting positive change.</p></div>
+                  <div class="content-section"><h2>Our Focus Areas</h2><div class="tag-row"><span class="tag tag-environment">Environmental Protection</span><span class="tag tag-environment">Sustainability</span><span class="tag tag-community">Community Outreach</span><span class="tag tag-education">Environmental Education</span></div></div>
+                </div>
+                <div id="ew-projects" class="tab-panel" role="tabpanel">
+                  <div class="org-project-card"><div><strong>Coastal Clean-up Drive 2026</strong><p>Ongoing · Baywalk, Manila · 45 volunteers</p></div><span class="badge badge-available">Active</span></div>
+                  <div class="org-project-card"><div><strong>Campus Recycling Program</strong><p>Active · University grounds · Monthly collection</p></div><span class="badge badge-available">Active</span></div>
+                  <div class="org-project-card"><div><strong>Tree Planting Initiative</strong><p>Upcoming · Jun 28 · La Mesa Eco Park</p></div><span class="badge badge-pending">Upcoming</span></div>
+                </div>
+                <div id="ew-resources" class="tab-panel" role="tabpanel">
+                  <div class="resources-grid" style="margin-top:0;">
+                    <article class="resource-card" data-category="supplies"><a href="resource-detail.html?id=res-cleaning"><div class="resource-card-image"><img src="https://images.unsplash.com/photo-1563453392212-326f5e854473?w=400&h=260&fit=crop" alt="Cleaning materials"></div><div class="resource-card-body"><div class="resource-card-top"><span class="tag tag-supplies">Supplies</span><span class="badge badge-available">Available</span></div><h3>Cleaning Materials</h3><div class="resource-card-footer"><div class="org-attr"><div class="org-avatar-sm">EW</div><span>by <strong>Eco Warriors</strong></span></div></div></a></article>
+                    <article class="resource-card" data-category="equipment"><div class="resource-card-image"><img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=260&fit=crop" alt="Gardening tools"></div><div class="resource-card-body"><div class="resource-card-top"><span class="tag tag-equipment">Equipment</span><span class="badge badge-used">In Use</span></div><h3>Gardening Tools Set</h3><div class="resource-card-footer"><div class="org-attr"><div class="org-avatar-sm">EW</div><span>by <strong>Eco Warriors</strong></span></div></div></div></article>
+                  </div>
+                </div>
+                <div id="ew-members" class="tab-panel" role="tabpanel">
+                  <p class="about-text" style="margin-bottom:1rem;">120+ active volunteers including student leaders, NSTP participants, and barangay youth partners.</p>
+                  <div class="org-members-grid">
+                    <div class="org-member-chip"><img src="https://i.pravatar.cc/64?img=10" alt=""><div><strong>Maria Santos</strong><span>President</span></div></div>
+                    <div class="org-member-chip"><img src="https://i.pravatar.cc/64?img=11" alt=""><div><strong>Juan Dela Cruz</strong><span>Project Lead</span></div></div>
+                    <div class="org-member-chip"><img src="https://i.pravatar.cc/64?img=12" alt=""><div><strong>Ana Reyes</strong><span>Volunteer Coordinator</span></div></div>
+                    <div class="org-member-chip"><img src="https://i.pravatar.cc/64?img=13" alt=""><div><strong>Mark Tan</strong><span>Outreach Officer</span></div></div>
+                  </div>
+                </div>
+                <div id="ew-updates" class="tab-panel" role="tabpanel">
+                  <div class="org-updates-list">
+                    <div class="org-update-item"><time>Jun 10, 2026</time><p>Registration for the Coastal Clean-up Drive is now open! Join us this Saturday at Baywalk, Manila.</p></div>
+                    <div class="org-update-item"><time>Jun 5, 2026</time><p>We partnered with Barangay Youth QC for a campus-wide recycling awareness week. Thank you to all volunteers!</p></div>
+                    <div class="org-update-item"><time>May 28, 2026</time><p>Tree planting initiative scheduled for June 28 at La Mesa Eco Park. 50 saplings ready to go!</p></div>
+                  </div>
+                </div>
+              </div>
+              <aside class="org-sidebar-col">
+                <div class="card org-sidebar-card">
+                  <h3>Recent Projects</h3>
+                  <ul class="org-project-list">
+                    <li class="org-project-item"><div class="org-project-icon" style="background:#DCFCE7;color:#15803D;">🌊</div><div><strong>Coastal Clean-up</strong><span>Jun 15, 2026</span></div></li>
+                    <li class="org-project-item"><div class="org-project-icon" style="background:#FEF3C7;color:#92400E;">♻️</div><div><strong>Recycling Program</strong><span>Ongoing</span></div></li>
+                    <li class="org-project-item"><div class="org-project-icon" style="background:#D1FAE5;color:#065F46;">🌱</div><div><strong>Tree Planting</strong><span>Jun 28, 2026</span></div></li>
+                  </ul>
+                  <a href="#" class="section-link" data-tab-trigger="ew-projects">View all projects →</a>
+                </div>
+              </aside>
             </div>
           </div>
-        </div>
 
-        <div id="tab-projects" class="tab-panel" role="tabpanel">
-          <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem;">
-            <li class="card" style="padding: 1rem;">
-              <a href="event-detail.html?id=event-coastal">
-              <strong>Coastal Clean-up Drive 2026</strong>
-              <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.25rem;">Ongoing · Baywalk, Manila</p>
-              </a>
-            </li>
-            <li class="card" style="padding: 1rem;">
-              
-              <strong>Campus Recycling Program</strong>
-              <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.25rem;">Active · University grounds</p>
-            
-            </li>
-            <li class="card" style="padding: 1rem;">
-              <a href="event-detail.html?id=event-tree">
-              <strong>Tree Planting Initiative</strong>
-              <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.25rem;">Upcoming · La Mesa Eco Park</p>
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <div id="tab-resources" class="tab-panel" role="tabpanel">
-          <div class="resources-grid" style="margin-top: 0;">
-            <article class="resource-card"><a href="resource-detail.html?id=res-cleaning">
-              <div class="resource-card-image">
-                <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&h=260&fit=crop" alt="">
+          <!-- IT Society -->
+          <div class="org-profile-panel" data-org-panel="it-society" data-org-id="it-society" style="display:none;">
+            <div class="card org-hero-card">
+              <div class="org-hero-inner">
+                <div class="org-hero-identity">
+                  <div class="org-hero-logo" style="background:#EEF2FF;color:#3730A3;"><img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=96&h=96&fit=crop"></div>
+                  <div>
+                    <div class="org-name-row"><h1>IT Society</h1><span class="verified-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Verified</span></div>
+                    <p class="org-hero-tagline">Tech workshops, digital literacy programs, and equipment sharing for the campus community.</p>
+                    <div class="org-hero-meta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Campus, Quezon City</span></div>
+                  </div>
+                </div>
+                <div class="org-hero-aside">
+                  <div class="org-hero-stats">
+                    <div class="org-stat-block"><strong>85</strong><span>Members</span></div>
+                    <div class="org-stat-block"><strong>8</strong><span>Projects</span></div>
+                    <div class="org-stat-block"><strong>5</strong><span>Partnerships</span></div>
+                  </div>
+                  <button type="button" class="btn btn-primary btn-follow" data-org-id="it-society" data-action="follow">Follow</button>
+                </div>
               </div>
-              <div class="resource-card-body">
-                <h3>Cleaning Materials</h3>
-                <p class="resource-from">From: Eco Warriors</p>
-                <span class="badge badge-available">Available</span>
-                
-              </div></a>
-            </article>
-            <article class="resource-card">
-              <div class="resource-card-image">
-                <img src="https://i.ebayimg.com/images/g/UacAAeSwiEZowt99/s-l1200.webp" alt="">
+            </div>
+            <div class="tabs" role="tablist">
+              <button type="button" class="tab active" data-tab="is-about">About</button>
+              <button type="button" class="tab" data-tab="is-projects">Projects</button>
+              <button type="button" class="tab" data-tab="is-resources">Resources</button>
+            </div>
+            <div class="org-content-grid" data-org-grid="it-society">
+              <div class="org-main-col">
+                <div id="is-about" class="tab-panel active"><div class="content-section"><h2>About</h2><p class="about-text">The IT Society organizes digital literacy workshops, coding bootcamps, and technology outreach programs. We manage shared equipment like projectors and computers for academic and community events.</p></div><div class="content-section"><h2>Our Focus Areas</h2><div class="tag-row"><span class="tag tag-education">Digital Literacy</span><span class="tag tag-education">Technology</span><span class="tag tag-community">Community Outreach</span></div></div></div>
+                <div id="is-projects" class="tab-panel"><div class="org-project-card"><div><strong>Digital Literacy Workshop</strong><p>Upcoming · Jun 20 · Barangay Hall, QC</p></div></div><div class="org-project-card"><div><strong>Campus Tech Fair 2026</strong><p>Planning · University Gymnasium</p></div></div></div>
+                <div id="is-resources" class="tab-panel"><div class="resources-grid"><article class="resource-card"><a href="resource-detail.html?id=res-projector"><div class="resource-card-image"><img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=400&h=260&fit=crop" alt="HD Projector"></div><div class="resource-card-body"><div class="resource-card-top"><span class="tag tag-equipment">Equipment</span><span class="badge badge-available">Available</span></div><h3>HD Projector</h3></div></a></article></div></div>
               </div>
-              <div class="resource-card-body">
-                <h3>Gardening Tools Set</h3>
-                <p class="resource-from">From: Eco Warriors</p>
-                <span class="badge badge-available">Available</span>
-              </div>
-            </article>
+              <aside class="org-sidebar-col"><div class="card org-sidebar-card"><h3>Recent Projects</h3><ul class="org-project-list"><li class="org-project-item"><div class="org-project-icon" style="background:#EEF2FF;color:#3730A3;">💻</div><div><strong>Digital Literacy</strong><span>Jun 20, 2026</span></div></li></ul></div></aside>
+            </div>
           </div>
-        </div>
 
-        <div id="tab-members" class="tab-panel" role="tabpanel">
-          <p class="about-text">120+ active volunteers including student leaders, NSTP participants, and barangay youth partners.</p>
-          <div class="member-row">
-            <img src="https://i.pravatar.cc/64?img=10" alt="" class="member-avatar">
-            <img src="https://i.pravatar.cc/64?img=11" alt="" class="member-avatar">
-            <img src="https://i.pravatar.cc/64?img=12" alt="" class="member-avatar">
-            <img src="https://i.pravatar.cc/64?img=13" alt="" class="member-avatar">
-            <span class="member-more">+116 more</span>
+          <!-- Health Alliance -->
+          <div class="org-profile-panel" data-org-panel="health-alliance" data-org-id="health-alliance" style="display:none;">
+            <div class="card org-hero-card">
+              <div class="org-hero-inner">
+                <div class="org-hero-identity">
+                  <div class="org-hero-logo" style="background:#FEE2E2;color:#991B1B;">HA</div>
+                  <div>
+                    <div class="org-name-row"><h1>Health Alliance</h1><span class="verified-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Verified</span></div>
+                    <p class="org-hero-tagline">Free medical missions, health fairs, and wellness programs for students and communities.</p>
+                    <div class="org-hero-meta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Campus, Quezon City</span></div>
+                  </div>
+                </div>
+                <div class="org-hero-aside">
+                  <div class="org-hero-stats"><div class="org-stat-block"><strong>60</strong><span>Volunteers</span></div><div class="org-stat-block"><strong>10</strong><span>Projects</span></div><div class="org-stat-block"><strong>4</strong><span>Partnerships</span></div></div>
+                  <button type="button" class="btn btn-primary btn-follow" data-org-id="health-alliance" data-action="follow">Follow</button>
+                </div>
+              </div>
+            </div>
+            <div class="tabs" role="tablist"><button type="button" class="tab active" data-tab="ha-about">About</button><button type="button" class="tab" data-tab="ha-projects">Projects</button></div>
+            <div class="org-content-grid"><div class="org-main-col"><div id="ha-about" class="tab-panel active"><div class="content-section"><h2>About</h2><p class="about-text">Health Alliance organizes free medical missions, health awareness fairs, and wellness programs in partnership with campus health services and local barangay health centers.</p></div><div class="content-section"><h2>Our Focus Areas</h2><div class="tag-row"><span class="tag tag-health">Health &amp; Wellness</span><span class="tag tag-community">Community Service</span></div></div></div><div id="ha-projects" class="tab-panel"><div class="org-project-card"><div><strong>Community Health Fair</strong><p>Upcoming · Jun 22 · Campus Gymnasium</p></div></div><div class="org-project-card"><div><strong>Mental Health Awareness Week</strong><p>Planning · Main Library</p></div></div></div></div><aside class="org-sidebar-col"><div class="card org-sidebar-card"><h3>Recent Projects</h3><ul class="org-project-list"><li class="org-project-item"><div class="org-project-icon" style="background:#FEE2E2;color:#991B1B;">🏥</div><div><strong>Health Fair</strong><span>Jun 22, 2026</span></div></li></ul></div></aside></div>
+          </div>
+
+          <!-- NSTP Office -->
+          <div class="org-profile-panel" data-org-panel="nstp-office" data-org-id="nstp-office" style="display:none;">
+            <div class="card org-hero-card">
+              <div class="org-hero-inner">
+                <div class="org-hero-identity">
+                  <div class="org-hero-logo" style="background:#EDE9FE;color:#5B21B6;">NO</div>
+                  <div>
+                    <div class="org-name-row"><h1>NSTP Office</h1><span class="verified-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Verified</span></div>
+                    <p class="org-hero-tagline">National Service Training Program coordinating community outreach and civic engagement.</p>
+                    <div class="org-hero-meta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Campus, Quezon City</span></div>
+                  </div>
+                </div>
+                <div class="org-hero-aside">
+                  <div class="org-hero-stats"><div class="org-stat-block"><strong>200+</strong><span>Students</span></div><div class="org-stat-block"><strong>20</strong><span>Projects</span></div><div class="org-stat-block"><strong>12</strong><span>Resources</span></div></div>
+                  <button type="button" class="btn btn-primary btn-follow" data-org-id="nstp-office" data-action="follow">Follow</button>
+                </div>
+              </div>
+            </div>
+            <div class="tabs" role="tablist"><button type="button" class="tab active" data-tab="no-about">About</button><button type="button" class="tab" data-tab="no-projects">Projects</button><button type="button" class="tab" data-tab="no-resources">Resources</button></div>
+            <div class="org-content-grid"><div class="org-main-col"><div id="no-about" class="tab-panel active"><div class="content-section"><h2>About</h2><p class="about-text">The NSTP Office coordinates the National Service Training Program, connecting students with meaningful community outreach, civic education, and disaster preparedness activities across partner barangays.</p></div></div><div id="no-projects" class="tab-panel"><div class="org-project-card"><div><strong>Barangay Youth Summit</strong><p>Upcoming · Jun 25 · Barangay Hall, QC</p></div></div><div class="org-project-card"><div><strong>Community Feeding Program</strong><p>Monthly · Partner barangays</p></div></div></div><div id="no-resources" class="tab-panel"><div class="resources-grid"><article class="resource-card"><a href="resource-detail.html?id=res-chairs"><div class="resource-card-image"><img src="https://images.unsplash.com/photo-1566248773564-d7b742cd8b95?w=400&h=260&fit=crop" alt="Plastic chairs"></div><div class="resource-card-body"><div class="resource-card-top"><span class="tag tag-furniture">Furniture</span><span class="badge badge-borrowed">Borrowed</span></div><h3>Plastic Chairs (20 pcs)</h3></div></a></article></div></div></div><aside class="org-sidebar-col"><div class="card org-sidebar-card"><h3>Recent Projects</h3><ul class="org-project-list"><li class="org-project-item"><div class="org-project-icon" style="background:#EDE9FE;color:#5B21B6;">🤝</div><div><strong>Youth Summit</strong><span>Jun 25, 2026</span></div></li></ul></div></aside></div>
           </div>
         </div>
       </main>
     </div>
   </div>
 
-  <div id="modal-overlay" class="modal-overlay" aria-hidden="true" role="dialog">
+  <div id="modal-overlay" class="modal-overlay" aria-hidden="true" aria-modal="true" role="dialog">
     <div class="modal">
       <h2 id="modal-title">Confirm</h2>
       <p id="modal-body"></p>
@@ -163,6 +328,81 @@
       </div>
     </div>
   </div>
+
+  <button type="button" class="scroll-top-btn" id="scroll-top" aria-label="Scroll to top" style="display:none;">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <polyline points="18 15 12 9 6 15"/>
+    </svg>
+  </button>
+
+    <script>
+    // accessibility helpers: lazy-load org images and manage aria-expanded on org buttons
+    (function(){
+      document.querySelectorAll('.org-card-btn').forEach(function(b){
+        b.setAttribute('aria-expanded','false');
+      });
+      // lazy-load images under orgs (progressive enhancement)
+      document.querySelectorAll('#orgs-directory img, .org-profile-view img').forEach(function(img){
+        if (!img.hasAttribute('loading')) img.setAttribute('loading','lazy');
+      });
+    })();
+    function showOrgProfile(orgKey) {
+      document.getElementById('orgs-directory').style.display = 'none';
+      document.getElementById('org-profile-view').style.display = 'block';
+      document.querySelectorAll('.org-profile-panel').forEach(function(p) {
+        var isShown = p.dataset.orgPanel === orgKey;
+        p.style.display = isShown ? 'block' : 'none';
+      });
+      // update aria-expanded on cards for screen readers
+      document.querySelectorAll('.org-card-btn').forEach(function(b){
+        b.setAttribute('aria-expanded', b.dataset.org === orgKey ? 'true' : 'false');
+      });
+      if (window.UnityHub && UnityHub.initFollowButtons) UnityHub.initFollowButtons();
+      window.scrollTo(0, 0);
+      // move focus to the org view for keyboard users
+      var firstPanel = document.querySelector('.org-profile-panel[style="display:block"]');
+      if (firstPanel) firstPanel.querySelector('h1')?.focus();
+    }
+
+    document.querySelectorAll('.org-card-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() { showOrgProfile(btn.dataset.org); });
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); } });
+    });
+
+    document.getElementById('org-back-btn').addEventListener('click', function() {
+      document.getElementById('orgs-directory').style.display = 'block';
+      document.getElementById('org-profile-view').style.display = 'none';
+      // reset aria-expanded
+      document.querySelectorAll('.org-card-btn').forEach(function(b){ b.setAttribute('aria-expanded','false'); });
+      window.scrollTo(0, 0);
+      document.getElementById('org-search')?.focus();
+    });
+
+    var orgSearch = document.getElementById('org-search');
+    if (orgSearch) {
+      orgSearch.addEventListener('input', function() {
+        var q = orgSearch.value.toLowerCase();
+        document.querySelectorAll('.org-card-btn').forEach(function(btn) {
+          var name = btn.querySelector('h3')?.textContent.toLowerCase() || '';
+          var desc = btn.querySelector('p')?.textContent.toLowerCase() || '';
+          btn.style.display = !q || name.includes(q) || desc.includes(q) ? '' : 'none';
+        });
+      });
+    }
+
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('org')) showOrgProfile(params.get('org'));
+
+    document.querySelectorAll('[data-tab-trigger]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        var tabId = link.dataset.tabTrigger;
+        var panel = link.closest('.org-profile-panel');
+        var tab = panel && panel.querySelector('.tab[data-tab="' + tabId + '"]');
+        if (tab) tab.click();
+      });
+    });
+  </script>
   <script src="js/ui-icons.js"></script>
   <script src="js/events-data.js"></script>
   <script src="js/storage.js"></script>

@@ -19,6 +19,7 @@
     'notifications.html': 'notifications',
     'profile.html': 'profile',
     'settings.html': 'settings',
+    'messages.html': 'messages',
   };
 
   const SIDEBAR_NAV_ITEMS = [
@@ -52,9 +53,8 @@
     },
     {
       key: 'messages',
-      href: '#',
+      href: 'messages.html',
       label: 'Messages',
-      extraClass: 'nav-item-messages',
       icon:
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>',
     },
@@ -91,7 +91,10 @@
       const isActive = item.key === activeKey;
       const classes = ['nav-item', item.extraClass, isActive ? 'active' : ''].filter(Boolean).join(' ');
       const aria = isActive ? ' aria-current="page"' : '';
-      return `<a href="${item.href}" class="${classes}"${aria}>${item.icon} ${item.label}</a>`;
+      const badgeHtml = item.badge
+        ? ` <span class="nav-badge-soon">${item.badge}</span>`
+        : '';
+      return `<a href="${item.href}" class="${classes}"${aria}>${item.icon} ${item.label}${badgeHtml}</a>`;
     }).join('');
   }
 
@@ -121,6 +124,7 @@
 
     const searchBar = topbar.querySelector('.search-bar');
     if (searchBar) {
+      searchBar.setAttribute('role', 'search');
       const input = searchBar.querySelector('input[type="search"]');
       if (input) {
         if (!input.id) input.id = 'global-search';
@@ -275,14 +279,6 @@
     });
   });
 
-  // Messages nav
-  document.querySelectorAll('.nav-item-messages').forEach((link) => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      showToast('Messages — coming in full version');
-    });
-  });
-
   // Mobile sidebar toggle
   const menuToggle = document.querySelector('.menu-toggle');
   const sidebar = document.querySelector('.sidebar');
@@ -351,22 +347,62 @@
   // Resources search & category
   const resourceSearch = document.querySelector('#resource-search');
   const resourceCategory = document.querySelector('#resource-category');
+  const resourceSort = document.querySelector('#resource-sort');
 
   function filterResources() {
     const q = (resourceSearch?.value || '').toLowerCase();
-    const cat = resourceCategory?.value || 'all';
+    const activeChip = document.querySelector('[data-resource-filter].active');
+    const cat = activeChip?.dataset.resourceFilter || resourceCategory?.value || 'all';
     document.querySelectorAll('.resource-card').forEach((card) => {
       const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+      const org = card.querySelector('.org-attr strong')?.textContent.toLowerCase() || '';
       const cardCat = card.dataset.category || '';
-      const matchQ = !q || title.includes(q);
+      const matchQ = !q || title.includes(q) || org.includes(q);
       const matchCat = cat === 'all' || cardCat === cat;
       card.style.display = matchQ && matchCat ? '' : 'none';
     });
+    sortResources();
     updateResourcesEmptyState();
+  }
+
+  function sortResources() {
+    const grid = document.querySelector('.resources-grid');
+    if (!grid || !resourceSort) return;
+    const cards = [...grid.querySelectorAll('.resource-card')];
+    const sortBy = resourceSort.value;
+    cards.sort((a, b) => {
+      if (sortBy === 'newest') return (+a.dataset.posted || 0) - (+b.dataset.posted || 0);
+      if (sortBy === 'oldest') return (+b.dataset.posted || 0) - (+a.dataset.posted || 0);
+      const nameA = a.querySelector('h3')?.textContent || '';
+      const nameB = b.querySelector('h3')?.textContent || '';
+      return nameA.localeCompare(nameB);
+    });
+    cards.forEach((card) => grid.appendChild(card));
   }
 
   resourceSearch?.addEventListener('input', filterResources);
   resourceCategory?.addEventListener('change', filterResources);
+  resourceSort?.addEventListener('change', filterResources);
+
+  document.querySelectorAll('[data-resource-filter]').forEach((chip) => {
+    // accessibility: make chips keyboard operable and expose pressed state
+    chip.setAttribute('role', 'button');
+    chip.tabIndex = 0;
+    chip.setAttribute('aria-pressed', chip.classList.contains('active') ? 'true' : 'false');
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('[data-resource-filter]').forEach((c) => { c.classList.remove('active'); c.setAttribute('aria-pressed','false'); });
+      chip.classList.add('active');
+      chip.setAttribute('aria-pressed','true');
+      filterResources();
+    });
+    chip.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); chip.click(); } });
+  });
+
+  document.getElementById('post-resource-btn')?.addEventListener('click', () => {
+    showToast('Share a Resource — posting form coming in the full version');
+  });
+
+  if (document.querySelector('.resources-grid')) filterResources();
 
   // Global search
   const globalSearch = document.querySelector('#global-search');
@@ -391,18 +427,26 @@
       const footer = card.querySelector('.event-card-footer');
       if (!footer) return;
       const registerBtn = footer.querySelector('[data-action="register"]');
-      let badge = footer.querySelector('.badge-registered');
+      let registeredState = footer.querySelector('.registered-state');
 
       if (UH.isRegistered(eventId)) {
         if (registerBtn) registerBtn.remove();
-        if (!badge) {
-          badge = document.createElement('span');
-          badge.className = 'badge badge-registered';
-          badge.textContent = 'Registered';
-          footer.insertBefore(badge, footer.firstChild);
+        footer.querySelectorAll('.badge-registered:not(.registered-state .badge-registered)').forEach((el) => {
+          if (!el.closest('.registered-state')) el.remove();
+        });
+        if (!registeredState) {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'registered-state';
+          wrapper.innerHTML = `
+            <span class="badge badge-registered">✓ Registered</span>
+            <button type="button" class="cancel-reg-link"
+                    data-action="cancel-register"
+                    aria-label="Cancel registration">Cancel</button>
+          `;
+          footer.insertBefore(wrapper, footer.firstChild);
         }
       } else {
-        if (badge) badge.remove();
+        if (registeredState) registeredState.remove();
         if (!footer.querySelector('[data-action="register"]')) {
         const btn = document.createElement('button');
         btn.type = 'button';
@@ -420,18 +464,28 @@
       if (!actions) return;
 
       const existingBtn = actions.querySelector('[data-action="register"]');
-      const existingBadge = actions.querySelector('.badge-registered');
+      let registeredState = actions.querySelector('.registered-state');
 
       if (UH.isRegistered(eventId)) {
         if (existingBtn) existingBtn.remove();
-        if (!existingBadge) {
-          const badge = document.createElement('span');
-          badge.className = 'badge badge-registered';
-          badge.textContent = 'Registered';
-          actions.insertBefore(badge, actions.firstChild);
+        actions.querySelectorAll('.badge-registered').forEach((el) => {
+          if (!el.closest('.registered-state')) el.remove();
+        });
+        registeredState = actions.querySelector('.registered-state');
+        if (!registeredState) {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'registered-state';
+          wrapper.innerHTML = `
+            <span class="badge badge-registered">✓ Registered</span>
+            <button type="button" class="cancel-reg-link"
+                    data-action="cancel-register"
+                    aria-label="Cancel registration">Cancel</button>
+          `;
+          actions.insertBefore(wrapper, actions.firstChild);
         }
       } else {
-        if (existingBadge) existingBadge.remove();
+        if (registeredState) registeredState.remove();
+        actions.querySelectorAll('.badge-registered').forEach((el) => el.remove());
         if (!existingBtn) {
           const btn = document.createElement('button');
           btn.type = 'button';
@@ -441,13 +495,6 @@
           actions.insertBefore(btn, actions.firstChild);
         }
       }
-    });
-  }
-
-  function bindRegisterButtons() {
-    document.querySelectorAll('[data-action="register"]:not([data-register-bound])').forEach((btn) => {
-      btn.dataset.registerBound = '1';
-      btn.addEventListener('click', onRegisterClick);
     });
   }
 
@@ -468,23 +515,21 @@
   }
 
   renderEventRegistrationState();
-  bindRegisterButtons();
 
   function updateEventDetailButton() {
     const eventId = document.body.dataset.eventId;
     if (!eventId || !window.UH) return;
-    document.querySelectorAll('[data-action="register"]').forEach((btn) => {
-      if (btn.closest('.event-list-item')) return;
+    document.querySelectorAll('.detail-sidebar-cta [data-action], .fixed-bottom-bar [data-action]').forEach((btn) => {
       if (UH.isRegistered(eventId)) {
-        btn.textContent = 'Registered ✓';
-        btn.disabled = true;
-        btn.classList.add('registered', 'btn-outline');
-        btn.classList.remove('btn-primary');
-      } else {
-        btn.textContent = 'Register Now';
+        btn.innerHTML = '✓ Registered';
         btn.disabled = false;
-        btn.classList.remove('registered', 'btn-outline');
-        btn.classList.add('btn-primary');
+        btn.className = 'btn btn-outline btn-lg registered-btn';
+        btn.dataset.action = 'cancel-register';
+      } else {
+        btn.innerHTML = 'Register Now';
+        btn.disabled = false;
+        btn.className = 'btn btn-primary btn-lg';
+        btn.dataset.action = 'register';
       }
     });
   }
@@ -497,11 +542,40 @@
     document.querySelectorAll('.resource-card[data-resource-id]').forEach((card) => {
       const id = card.dataset.resourceId;
       const btn = card.querySelector('.bookmark-btn');
-      if (btn && UH.isSaved(id)) btn.classList.add('saved');
+      if (btn) {
+        const isSaved = UH.isSaved(id);
+        btn.classList.toggle('saved', isSaved);
+        btn.title = isSaved ? 'Remove from saved' : 'Save resource';
+      }
     });
   }
 
   initBookmarks();
+
+  function initSaveResourceButton() {
+    if (!window.UH || !document.body.dataset.resourceId) return;
+    const resId = document.body.dataset.resourceId;
+    document.querySelectorAll('[data-action="save-resource"]').forEach((btn) => {
+      const isSaved = UH.isSaved(resId);
+      btn.setAttribute('aria-pressed', isSaved ? 'true' : 'false');
+      btn.textContent = isSaved ? 'Saved' : 'Save Resource';
+    });
+  }
+
+  initSaveResourceButton();
+
+  // Save resource button on detail page
+  document.querySelectorAll('[data-action="save-resource"]').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      const resId = document.body.dataset.resourceId || 'res-projector';
+      if (!window.UH || !resId) return;
+      const nowSaved = UH.toggleSaved(resId);
+      btn.setAttribute('aria-pressed', nowSaved ? 'true' : 'false');
+      btn.textContent = nowSaved ? 'Saved' : 'Save Resource';
+      showToast(nowSaved ? 'Resource saved to your list' : 'Removed from saved');
+      updateNotificationDot();
+    });
+  });
 
   document.querySelectorAll('.bookmark-btn').forEach((btn) => {
     btn.addEventListener('click', (e) => {
@@ -512,6 +586,7 @@
       if (!id || !window.UH) return;
       const nowSaved = UH.toggleSaved(id);
       btn.classList.toggle('saved', nowSaved);
+      btn.title = nowSaved ? 'Remove from saved' : 'Save resource';
       showToast(nowSaved ? 'Resource saved to your list' : 'Removed from saved');
     });
   });
@@ -559,11 +634,76 @@
         });
         tab.classList.add('active');
         tab.setAttribute('aria-selected', 'true');
-        const container = tabBar.closest('.org-profile') || document;
+        const container =
+          tabBar.closest('.org-profile-panel') ||
+          tabBar.closest('.profile-page') ||
+          tabBar.closest('.org-profile') ||
+          document;
         container.querySelectorAll('.tab-panel').forEach((panel) => {
           panel.classList.toggle('active', panel.id === panelId);
         });
+        const orgGrid = tabBar.closest('.org-profile-panel')?.querySelector('.org-content-grid');
+        if (orgGrid) {
+          const isAbout = panelId.endsWith('-about');
+          orgGrid.classList.toggle('full-width', !isAbout);
+        }
       });
+    });
+  });
+
+  // Settings sub-navigation
+  document.querySelectorAll('.settings-nav-item').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const panelId = btn.dataset.settingsPanel;
+      document.querySelectorAll('.settings-nav-item').forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.settings-panel').forEach((panel) => {
+        panel.classList.toggle('active', panel.id === panelId);
+      });
+    });
+  });
+
+  function initFollowButtons() {
+    if (!window.UH) return;
+    document.querySelectorAll('[data-action="follow"]').forEach((btn) => {
+      const orgId = btn.dataset.orgId;
+      if (!orgId) return;
+      const following = UH.isFollowing(orgId);
+      btn.textContent = following ? 'Following' : 'Follow';
+      btn.classList.toggle('following', following);
+      if (btn.dataset.followBound) return;
+      btn.dataset.followBound = '1';
+      btn.addEventListener('click', () => {
+        const nowFollowing = UH.toggleFollowing(orgId);
+        btn.textContent = nowFollowing ? 'Following' : 'Follow';
+        btn.classList.toggle('following', nowFollowing);
+        showToast(
+          nowFollowing ? 'You are now following this organization' : 'Unfollowed organization',
+          nowFollowing ? 'success' : 'info'
+        );
+      });
+    });
+  }
+
+  initFollowButtons();
+
+  document.querySelectorAll('.organizer-box-btn[data-org]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var org = btn.dataset.org;
+      document.getElementById('modal-title').textContent = org;
+      document.getElementById('modal-body').textContent =
+        org + ' is a verified student organization on UnityHub. ' +
+        'Visit the Organizations page to see their full profile, ' +
+        'active projects, and available resources.';
+      var confirmBtn = document.getElementById('modal-confirm');
+      confirmBtn.textContent = 'View Organizations';
+      confirmBtn.className = 'btn btn-primary';
+      confirmBtn.onclick = function () { window.location.href = 'organization.html'; };
+      document.getElementById('modal-cancel').textContent = 'Close';
+      var overlay = document.getElementById('modal-overlay');
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+      confirmBtn.focus();
     });
   });
 
@@ -578,20 +718,47 @@
     register: {
       title: 'Confirm Registration',
       body: 'You are about to register for this event. You will receive a reminder notification before the event date.',
+      confirm: 'Confirm',
+      confirmClass: 'btn-primary',
     },
     borrow: {
       title: 'Request to Borrow',
       body: 'Your request will be sent to the organization. They will contact you to arrange pickup and return dates.',
+      confirm: 'Confirm',
+      confirmClass: 'btn-primary',
+    },
+    'cancel-register': {
+      title: 'Cancel Registration?',
+      body: () =>
+        `Remove your registration for "${pendingEventName}"? This cannot be undone.`,
+      confirm: 'Yes, Cancel',
+      confirmClass: 'btn-danger',
     },
   };
 
   let pendingAction = null;
 
+  function resetModalButtons() {
+    if (modalConfirm) {
+      modalConfirm.textContent = 'Confirm';
+      modalConfirm.className = 'btn btn-primary';
+      modalConfirm.onclick = null;
+    }
+    if (modalCancel) modalCancel.textContent = 'Cancel';
+  }
+
   function openModal(type) {
     pendingAction = type;
     const copy = modalCopy[type];
     if (modalTitle) modalTitle.textContent = copy.title;
-    if (modalBody) modalBody.textContent = copy.body;
+    if (modalBody) {
+      modalBody.textContent = typeof copy.body === 'function' ? copy.body() : copy.body;
+    }
+    resetModalButtons();
+    if (modalConfirm) {
+      modalConfirm.textContent = copy.confirm || 'Confirm';
+      modalConfirm.className = 'btn ' + (copy.confirmClass || 'btn-primary');
+    }
     modalOverlay?.classList.add('open');
     modalOverlay?.setAttribute('aria-hidden', 'false');
   }
@@ -600,11 +767,42 @@
     modalOverlay?.classList.remove('open');
     modalOverlay?.setAttribute('aria-hidden', 'true');
     pendingAction = null;
+    resetModalButtons();
   }
 
   modalCancel?.addEventListener('click', closeModal);
   modalOverlay?.addEventListener('click', (e) => {
     if (e.target === modalOverlay) closeModal();
+  });
+
+  document.addEventListener('click', function (e) {
+    const registerBtn = e.target.closest('[data-action="register"]');
+    if (registerBtn) {
+      onRegisterClick.call(registerBtn, e);
+      return;
+    }
+
+    const btn = e.target.closest('[data-action="cancel-register"]');
+    if (!btn) return;
+    const item = btn.closest('[data-event-id]');
+    pendingEventId = item
+      ? item.dataset.eventId
+      : (document.body.dataset.eventId || 'event-coastal');
+    pendingEventName = item
+      ? (item.dataset.eventName || item.querySelector('h3')?.textContent?.trim())
+      : (document.querySelector('h1')?.textContent?.trim() || 'this event');
+    pendingAction = 'cancel-register';
+    if (modalTitle) modalTitle.textContent = 'Cancel Registration?';
+    if (modalBody) modalBody.textContent =
+      'Remove your registration for "' + pendingEventName + '"?';
+    if (modalConfirm) {
+      modalConfirm.textContent = 'Yes, Cancel';
+      modalConfirm.className = 'btn btn-danger';
+    }
+    if (modalCancel) modalCancel.textContent = 'Keep Registration';
+    modalOverlay?.classList.add('open');
+    modalOverlay?.setAttribute('aria-hidden', 'false');
+    setTimeout(() => modalConfirm?.focus(), 50);
   });
 
   modalConfirm?.addEventListener('click', () => {
@@ -618,9 +816,22 @@
       });
       showToast('Successfully registered! Check your notifications for reminders.', 'success');
       renderEventRegistrationState();
-      bindRegisterButtons();
       updateEventDetailButton();
       updateNotificationDot();
+    } else if (pendingAction === 'cancel-register' && window.UH && pendingEventId) {
+      UH.cancelRegistration(pendingEventId);
+      UH.addNotification({
+        type: 'event',
+        title: 'Registration cancelled',
+        body: 'You cancelled your spot for "' + (pendingEventName || 'an event') + '".',
+        time: 'Just now',
+      });
+      showToast('Registration cancelled.', 'info');
+      renderEventRegistrationState();
+      updateEventDetailButton();
+      updateNotificationDot();
+      if (modalConfirm) modalConfirm.className = 'btn btn-primary';
+      if (modalCancel) modalCancel.textContent = 'Cancel';
     } else if (pendingAction === 'borrow' && window.UH) {
       const resId = document.body.dataset.resourceId || 'res-projector';
       UH.addBorrowRequest({
@@ -654,7 +865,7 @@
       document.body.appendChild(container);
     }
     const toast = document.createElement('div');
-    toast.className = `toast${type === 'success' ? ' success' : ''}`;
+    toast.className = `toast${type === 'success' ? ' success' : type === 'info' ? ' info' : ''}`;
     toast.textContent = message;
     container.appendChild(toast);
     setTimeout(() => {
@@ -667,6 +878,7 @@
   window.UnityHub.showToast = showToast;
   window.UnityHub.openModal = openModal;
   window.UnityHub.closeModal = closeModal;
+  window.UnityHub.initFollowButtons = initFollowButtons;
 
   const params = new URLSearchParams(window.location.search);
   const searchQ = params.get('q');
@@ -677,13 +889,21 @@
 
   updateEventsEmptyState();
   updateResourcesEmptyState();
+
+  const scrollBtn = document.getElementById('scroll-top');
+  if (scrollBtn) {
+    window.addEventListener('scroll', () => {
+      scrollBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+    });
+    scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  }
 })();
 
 // Implementation for Resource Frontend
 
 function initResourceDetailPage() {
   const page = window.location.pathname.split('/').pop() || 'index.html';
-if (page !== 'resource-detail.html' || !window.UnityHubResources) return;
+  if (page !== 'resource-detail.html' || !window.UnityHubResources) return;
 
   const params = new URLSearchParams(window.location.search);
   const resourceId = params.get('id') || document.body.dataset.resourceId || UnityHubResources.defaultId;
@@ -693,50 +913,141 @@ if (page !== 'resource-detail.html' || !window.UnityHubResources) return;
   document.body.dataset.resourceId = resourceId;
   document.title = `${resource.title} | UnityHub`;
 
-  const heroImg = document.querySelector('.detail-hero-wrap img');
-  if (heroImg) {
-    heroImg.src = resource.image;
-    heroImg.alt = resource.imageAlt;
+  // ── Gallery ──
+  const mainImg = document.getElementById('rd-main-img');
+  if (mainImg) { mainImg.src = resource.image; mainImg.alt = resource.imageAlt || resource.title; }
+
+  // Badge overlay on gallery
+  const galleryBadge = document.getElementById('rd-badge');
+  if (galleryBadge) {
+    galleryBadge.textContent = resource.badge;
+    if (resource.badgeClass === 'badge-borrowed') galleryBadge.classList.add('borrowed');
+    else if (resource.badgeClass === 'badge-reserved') galleryBadge.classList.add('reserved');
   }
 
-  const titleEl = document.querySelector('.detail-content h1');
+  // Thumbnail gallery — rebuild from resource.images if present, else reuse main image
+  const thumbsEl = document.getElementById('rd-thumbs');
+  if (thumbsEl && resource.images && resource.images.length) {
+    const extras = resource.images.length > 4 ? resource.images.length - 3 : 0;
+    const shown = resource.images.slice(0, extras ? 3 : resource.images.length);
+    thumbsEl.innerHTML = shown.map((src, i) => `
+      <button class="rd-thumb${i === 0 ? ' active' : ''}" aria-label="Image ${i + 1}" data-src="${src}">
+        <img src="${src.replace(/w=\d+/, 'w=120').replace(/h=\d+/, 'h=80')}" alt="">
+      </button>`).join('') + (extras ? `
+      <button class="rd-thumb rd-thumb-more" aria-label="More images">
+        <img src="${resource.images[3].replace(/w=\d+/, 'w=120').replace(/h=\d+/, 'h=80')}" alt="">
+        <span class="rd-thumb-more-label">+${extras}</span>
+      </button>` : '');
+  }
+
+  // Thumbnail click → swap main image
+  if (thumbsEl) {
+    thumbsEl.addEventListener('click', function (e) {
+      const btn = e.target.closest('.rd-thumb:not(.rd-thumb-more)');
+      if (!btn || !btn.dataset.src) return;
+      if (mainImg) { mainImg.style.opacity = '0'; setTimeout(() => { mainImg.src = btn.dataset.src; mainImg.style.opacity = '1'; }, 120); }
+      thumbsEl.querySelectorAll('.rd-thumb').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  }
+
+  // ── Title block ──
+  const titleEl = document.getElementById('rd-title');
   if (titleEl) titleEl.textContent = resource.title;
 
-  const sections = document.querySelectorAll('.detail-content .detail-section');
-  const descP = sections[0]?.querySelector('p');
-  if (descP) descP.textContent = resource.description;
+  const badgeSidebar = document.getElementById('rd-badge-sidebar');
+  if (badgeSidebar) { badgeSidebar.textContent = resource.badge; badgeSidebar.className = `badge ${resource.badgeClass}`; }
 
-  const guideList = sections[1]?.querySelector('ul');
+  const categoryEl = document.getElementById('rd-category');
+  if (categoryEl && resource.category) categoryEl.textContent = resource.category;
+
+  const providerName = document.getElementById('rd-provider-name');
+  if (providerName) providerName.textContent = `by ${resource.from}`;
+
+  const providerAvatar = document.getElementById('rd-provider-avatar');
+  if (providerAvatar) {
+    if (resource.fromImg) {
+      providerAvatar.innerHTML = `<img src="${resource.fromImg}" alt="${resource.from}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
+    } else {
+      providerAvatar.textContent = resource.from.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
+    }
+  }
+
+  const fromBtn = document.querySelector('.organizer-box-btn');
+  if (fromBtn) fromBtn.dataset.org = resource.from;
+
+  const tagline = document.getElementById('rd-tagline');
+  if (tagline && resource.tagline) tagline.textContent = resource.tagline;
+  else if (tagline && resource.description) tagline.textContent = resource.description.slice(0, 120) + (resource.description.length > 120 ? '…' : '');
+
+  // ── Stats grid ──
+  const setEl = (id, val) => { const el = document.getElementById(id); if (el && val) el.textContent = val; };
+  setEl('rd-quantity', resource.quantity);
+  setEl('rd-condition', resource.condition ? resource.condition.split('·')[0].trim() : null);
+  setEl('rd-location', resource.location);
+  setEl('rd-avail-text', resource.availCount || resource.availability);
+  setEl('rd-borrowed-count', resource.borrowedCount || null);
+
+  // ── Description & Guidelines ──
+  const descEl = document.getElementById('rd-description');
+  if (descEl && resource.description) descEl.textContent = resource.description;
+
+  const guideList = document.getElementById('rd-guidelines');
   if (guideList && resource.guidelines) {
-    guideList.innerHTML = resource.guidelines.map((g) => `<li>${g}</li>`).join('');
+    guideList.innerHTML = resource.guidelines.map(g => `<li>${g}</li>`).join('');
   }
 
-  const meta = document.querySelector('.detail-meta');
-  if (meta) {
-    meta.innerHTML = [
-      `<span>📦 ${resource.condition}</span>`,
-      `<span>📅 ${resource.availability}</span>`,
-      `<span>🏷️ ${resource.category}</span>`,
-    ].join('');
+  // ── Meta card ──
+  setEl('rd-posted', resource.postedAt || '3 days ago');
+  setEl('rd-meta-from', resource.from);
+  setEl('rd-org-type', resource.orgType);
+  setEl('rd-response-time', resource.responseTime);
+
+  // ── Availability CTA state ──
+  const isUnavailable = resource.badgeClass === 'badge-borrowed' || resource.badgeClass === 'badge-reserved';
+  if (isUnavailable) {
+    document.querySelectorAll('.rd-cta, .fixed-bottom-bar').forEach((container) => {
+      container.innerHTML = '<button type="button" class="btn btn-outline btn-lg" style="width:100%" disabled>Currently Unavailable</button>';
+    });
   }
-
-  const badgeEl = document.querySelector('.detail-sidebar-card .badge');
-  if (badgeEl) {
-    badgeEl.textContent = resource.badge;
-    badgeEl.className = `badge ${resource.badgeClass}`;
-  }
-
-  const fromName = document.querySelector('.organizer-box strong');
-  if (fromName) fromName.textContent = resource.from;
-
-  const fromImg = document.querySelector('.organizer-box img');
-  if (fromImg) fromImg.src = resource.fromImg;
 }
 
- if (!isPublicPage) {
-    initSidebarNav();
-    initAppChrome();
-    wireEventDetailLinks();
-    initEventDetailPage();
-    initResourceDetailPage();
-  }
+// Accessibility and keyboard enhancements
+document.addEventListener('DOMContentLoaded', function () {
+  // Make filter chips keyboard-operable and expose aria-pressed
+  document.querySelectorAll('.filter-chip, [data-resource-filter]').forEach(function (chip) {
+    if (!chip.hasAttribute('role')) chip.setAttribute('role', 'button');
+    if (!chip.hasAttribute('tabindex')) chip.tabIndex = 0;
+    chip.setAttribute('aria-pressed', chip.classList.contains('active') ? 'true' : 'false');
+    chip.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); chip.click(); }
+    });
+    chip.addEventListener('click', function () {
+      chip.setAttribute('aria-pressed', chip.classList.contains('active') ? 'true' : 'false');
+    });
+  });
+
+  // Make event/resource cards keyboard-activatable
+  document.querySelectorAll('[data-event-id], .resource-card').forEach(function (el) {
+    if (!el.hasAttribute('tabindex')) el.tabIndex = 0;
+    el.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        var a = el.querySelector('a');
+        if (a) a.click();
+      }
+    });
+  });
+
+  // Ensure bookmark buttons expose aria-pressed and are keyboard-accessible
+  document.querySelectorAll('.bookmark-btn').forEach(function (btn) {
+    btn.setAttribute('aria-pressed', btn.classList.contains('saved') ? 'true' : 'false');
+    if (!btn.hasAttribute('tabindex')) btn.tabIndex = 0;
+    btn.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+    });
+    // sync pressed state after click handlers (some handlers toggle 'saved')
+    btn.addEventListener('click', function () {
+      setTimeout(function () { btn.setAttribute('aria-pressed', btn.classList.contains('saved') ? 'true' : 'false'); }, 40);
+    });
+  });
+});

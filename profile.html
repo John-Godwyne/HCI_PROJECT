@@ -4,9 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profile | UnityHub</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css?v=4">
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
   <div class="sidebar-overlay"></div>
   <div class="app-shell">
     <aside class="sidebar" aria-label="Main navigation">
@@ -14,31 +15,22 @@
         <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" fill="#E8EAF6"/><circle cx="16" cy="20" r="6" fill="#3F51B5"/><circle cx="32" cy="20" r="6" fill="#5C6BC0"/><circle cx="24" cy="32" r="6" fill="#7986CB"/></svg>
         <div><span>UnityHub</span><span class="sidebar-tagline">Connect. Collaborate. Create Impact.</span></div>
       </div>
-      <nav class="sidebar-nav">
-        <a href="index.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg> Dashboard</a>
-        <a href="events.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/></svg> Events</a>
-        <a href="resources.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg> Resources</a>
-        <a href="organization.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> Organizations</a>
-        <a href="#" class="nav-item nav-item-messages"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> Messages</a>
-        <a href="notifications.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg> Notifications</a>
-        <a href="profile.html" class="nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Profile</a>
-        <a href="settings.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/></svg> Settings</a>
-      </nav>
+      <nav class="sidebar-nav"></nav>
       <div class="sidebar-footer">
-        <button type="button" class="btn-logout"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg> Logout</button>
+        <button type="button" class="btn-logout">Logout</button>
       </div>
     </aside>
 
     <div class="main-wrapper">
       <header class="topbar">
-        <button type="button" class="menu-toggle" aria-label="Open menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/></svg></button>
-        <div class="search-bar">
-          <input type="search" id="global-search" placeholder="Search for events, organizations, or resources...">
+        <button type="button" class="menu-toggle" aria-label="Open menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+        <div class="search-bar" role="search">
+          <input type="search" id="global-search" placeholder="Search for events, organizations, or resources..." aria-label="Global search">
         </div>
         <div class="topbar-actions">
-          <a href="notifications.html" class="btn-icon" style="position:relative;text-decoration:none;">
+          <a href="notifications.html" class="btn-icon" aria-label="Notifications" style="position:relative;text-decoration:none;">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>
-            <span class="notification-dot"></span>
+            <span class="notification-dot" aria-hidden="true"></span>
           </a>
           <a href="profile.html" class="user-profile" style="text-decoration:none;">
             <img src="" alt="" class="user-avatar">
@@ -47,18 +39,40 @@
         </div>
       </header>
 
-      <main class="main-content">
-        <div class="card profile-header-card">
-          <img src="" alt="" class="profile-avatar-lg" id="profile-avatar">
-          <div class="profile-info">
-            <h2 id="profile-name">—</h2>
-            <p id="profile-role">—</p>
-            <p id="profile-email">—</p>
+      <main id="main-content" class="main-content profile-page">
+        <div class="card profile-hero-card">
+          <div class="profile-hero-left">
+            <div class="profile-avatar-wrap">
+              <img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Ccircle cx='80' cy='80' r='78' fill='%23E8EAF6'/%3E%3Ctext x='50%25' y='55%25' font-size='56' text-anchor='middle' fill='%233F51B5' font-family='Arial,sans-serif'%3EU%3C/text%3E%3C/svg%3E" alt="Profile avatar" class="profile-avatar-lg" id="profile-avatar">
+            </div>
+            <div class="profile-hero-info">
+              <h1 id="profile-name">—</h1>
+              <span class="profile-role-badge" id="profile-role">—</span>
+              <div class="profile-contact-list">
+                <span class="profile-contact-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  <span id="profile-email">—</span>
+                </span>
+                <span class="profile-contact-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                  <span id="profile-phone">—</span>
+                </span>
+                <span class="profile-contact-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <span id="profile-location">—</span>
+                </span>
+                <span class="profile-contact-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
+                  Joined <span id="profile-joined">—</span>
+                </span>
+              </div>
+            </div>
           </div>
           <button type="button" class="btn btn-outline" id="edit-profile-btn">Edit Profile</button>
         </div>
 
-        <div class="profile-edit-form" id="profile-edit-form">
+        <div class="profile-edit-form card" id="profile-edit-form">
+          <h2 class="section-title" style="margin-bottom:1rem;">Edit Profile</h2>
           <div class="form-group">
             <label for="edit-name">Full Name</label>
             <input type="text" id="edit-name">
@@ -66,7 +80,15 @@
           <div class="form-group">
             <label for="edit-email">Email</label>
             <input type="email" id="edit-email" readonly>
-            <p style="font-size:0.75rem;color:var(--text-muted);">Email cannot be changed</p>
+            <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.25rem;">Email cannot be changed</p>
+          </div>
+          <div class="form-group">
+            <label for="edit-phone">Phone</label>
+            <input type="tel" id="edit-phone" placeholder="+63 9XX XXX XXXX">
+          </div>
+          <div class="form-group">
+            <label for="edit-location">Location</label>
+            <input type="text" id="edit-location" placeholder="City, Philippines">
           </div>
           <div class="form-group">
             <label for="edit-role">Role</label>
@@ -77,33 +99,101 @@
               <option value="Community Volunteer">Community Volunteer</option>
             </select>
           </div>
+          <div class="form-group">
+            <label for="edit-bio">About Me</label>
+            <textarea id="edit-bio" rows="3" placeholder="Tell the community a bit about yourself..." style="width:100%;padding:0.625rem 0.875rem;border:1.5px solid var(--border);border-radius:var(--radius-md);font-family:inherit;font-size:0.875rem;resize:vertical;"></textarea>
+          </div>
           <div style="display:flex;gap:0.75rem;">
             <button type="button" class="btn btn-primary" id="save-profile">Save Changes</button>
             <button type="button" class="btn btn-outline" id="cancel-profile">Cancel</button>
           </div>
         </div>
 
-        <h2 class="section-title" style="margin-top:1.5rem;">Your Activity</h2>
-        <div class="activity-stats">
-          <div class="activity-stat-card"><strong id="stat-events">0</strong><span>Events Registered</span></div>
-          <div class="activity-stat-card"><strong id="stat-saved">0</strong><span>Resources Saved</span></div>
-          <div class="activity-stat-card"><strong id="stat-borrows">0</strong><span>Borrow Requests</span></div>
+        <div class="tabs profile-tabs" role="tablist">
+          <button type="button" class="tab active" role="tab" aria-selected="true" data-tab="profile-overview">Overview</button>
+          <button type="button" class="tab" role="tab" aria-selected="false" data-tab="profile-activity">My Activity</button>
+          <button type="button" class="tab" role="tab" aria-selected="false" data-tab="profile-saved">Saved Items</button>
+          <button type="button" class="tab" role="tab" aria-selected="false" data-tab="profile-borrows">Borrow Requests</button>
+          <button type="button" class="tab" role="tab" aria-selected="false" data-tab="profile-events">Registered Events</button>
         </div>
 
-        <div class="card" style="margin-top:1.5rem; padding: 1rem;">
-          <h2 class="section-title">Registered Events</h2>
-          <div id="registered-events-list"></div>
+        <div id="profile-overview" class="tab-panel active" role="tabpanel">
+          <div class="profile-content-grid">
+            <div class="content-section">
+              <h2>About Me</h2>
+              <p id="profile-bio" class="about-text">—</p>
+            </div>
+            <div class="content-section">
+              <h2>Interests</h2>
+              <div class="tag-row" id="profile-interests"></div>
+            </div>
+          </div>
+          <div class="content-section" style="margin-top:1rem;">
+            <h2>My Impact</h2>
+            <div class="profile-impact-grid">
+              <div class="profile-impact-item">
+                <div class="profile-impact-icon events">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
+                </div>
+                <div><strong id="impact-events">0</strong><span>Events Joined</span></div>
+              </div>
+              <div class="profile-impact-item">
+                <div class="profile-impact-icon resources">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+                </div>
+                <div><strong id="impact-borrows">0</strong><span>Resources Borrowed</span></div>
+              </div>
+              <div class="profile-impact-item">
+                <div class="profile-impact-icon orgs">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                </div>
+                <div><strong id="impact-orgs">0</strong><span>Organizations Supported</span></div>
+              </div>
+              <div class="profile-impact-item">
+                <div class="profile-impact-icon hours">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div><strong id="impact-hours">0</strong><span>Hours Volunteered</span></div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="card" style="margin-top:1.5rem; padding: 1rem;">
-          <h2 class="section-title">Borrow Requests</h2>
-          <div id="borrow-requests-list"></div>
+
+        <div id="profile-activity" class="tab-panel" role="tabpanel">
+          <div class="content-section">
+            <h2>Recent Activity</h2>
+            <div id="activity-feed"></div>
+          </div>
+        </div>
+
+        <div id="profile-saved" class="tab-panel" role="tabpanel">
+          <div class="card profile-list-card">
+            <div id="saved-resources-list"></div>
+          </div>
+        </div>
+
+        <div id="profile-borrows" class="tab-panel" role="tabpanel">
+          <div class="card profile-list-card">
+            <div id="borrow-requests-list"></div>
+          </div>
+        </div>
+
+        <div id="profile-events" class="tab-panel" role="tabpanel">
+          <div class="card profile-list-card">
+            <div id="registered-events-list"></div>
+          </div>
         </div>
       </main>
     </div>
   </div>
 
+  <button type="button" class="scroll-top-btn" id="scroll-top" aria-label="Scroll to top" style="display:none;">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
   <script src="js/ui-icons.js"></script>
   <script src="js/events-data.js"></script>
+  <script src="js/resources-data.js"></script>
   <script src="js/storage.js"></script>
   <script src="js/ui-enhancements.js"></script>
   <script src="js/app.js"></script>
@@ -116,33 +206,84 @@
       'event-tree': 'Tree Planting Initiative',
     };
 
+    const RESOURCE_MAP = {
+      'res-projector': 'HD Projector',
+      'res-sound': 'Sound System',
+      'res-tables': 'Folding Tables (set of 5)',
+      'res-chairs': 'Plastic Chairs (20 pcs)',
+      'res-art': 'Art Materials Kit',
+      'res-cleaning': 'Cleaning Materials',
+    };
+
     function renderProfile() {
-      const user = UH.getCurrentUser();
-      if (!user) return;
+      const raw = UH.getCurrentUser();
+      if (!raw) return;
+      const user = UH.ensureProfileFields(raw);
 
       document.getElementById('profile-avatar').src = user.avatar;
+      document.getElementById('profile-avatar').alt = user.name + ' profile photo';
       document.getElementById('profile-name').textContent = user.name;
       document.getElementById('profile-role').textContent = user.role;
       document.getElementById('profile-email').textContent = user.email;
+      document.getElementById('profile-phone').textContent = user.phone || 'Not set';
+      document.getElementById('profile-location').textContent = user.location;
+      document.getElementById('profile-joined').textContent = user.joinedAt;
+      document.getElementById('profile-bio').textContent = user.bio ||
+        'Passionate about community service and making a positive impact through volunteer work and collaboration with local organizations.';
 
-      document.getElementById('stat-events').textContent = UH.getRegistrations().length;
-      document.getElementById('stat-saved').textContent = UH.getSaved().length;
-      document.getElementById('stat-borrows').textContent = UH.getBorrowRequests().length;
+      const interestsEl = document.getElementById('profile-interests');
+      interestsEl.innerHTML = (user.interests || []).map(function (i) {
+        return '<span class="interest-tag">' + i + '</span>';
+      }).join('');
 
-      const regList = document.getElementById('registered-events-list');
       const regs = UH.getRegistrations();
-      regList.innerHTML = regs.length === 0
-        ? '<p style="color:var(--text-secondary);font-size:0.9rem;">No registered events. <a href="events.html">Browse events</a></p>'
+      const borrows = UH.getBorrowRequests();
+      const following = UH.getFollowing();
+
+      document.getElementById('impact-events').textContent = regs.length;
+      document.getElementById('impact-borrows').textContent = borrows.filter(function (b) { return b.status === 'approved'; }).length || borrows.length;
+      document.getElementById('impact-orgs').textContent = following.length;
+      document.getElementById('impact-hours').textContent = user.volunteerHours || (regs.length * 4);
+
+      const activityFeed = document.getElementById('activity-feed');
+      const activities = [];
+      regs.forEach(function (id) {
+        activities.push({ type: 'event', text: 'Registered for ' + (EVENT_MAP[id] || id), time: 'Recently' });
+      });
+      borrows.slice(0, 3).forEach(function (b) {
+        activities.push({ type: 'borrow', text: 'Requested to borrow ' + b.resourceName, time: b.requestedAt });
+      });
+      activityFeed.innerHTML = activities.length === 0
+        ? '<p class="profile-empty">No recent activity yet. <a href="events.html">Browse events</a> to get started.</p>'
+        : activities.map(function (a) {
+          return '<div class="profile-list-item"><span>' + a.text + '</span><span style="font-size:0.75rem;color:var(--text-muted);">' + a.time + '</span></div>';
+        }).join('');
+
+      const savedList = document.getElementById('saved-resources-list');
+      const saved = UH.getSaved();
+      savedList.innerHTML = saved.length === 0
+        ? '<p class="profile-empty">No saved resources. <a href="resources.html">Browse resources</a></p>'
         : '';
-      regs.forEach((id) => {
+      saved.forEach(function (id) {
         const row = document.createElement('div');
         row.className = 'profile-list-item';
-        row.innerHTML = `<span>${EVENT_MAP[id] || id}</span>`;
+        row.innerHTML = '<span>' + (RESOURCE_MAP[id] || id) + '</span><a href="resource-detail.html?id=' + id + '" class="btn btn-outline btn-sm">View</a>';
+        savedList.appendChild(row);
+      });
+
+      const regList = document.getElementById('registered-events-list');
+      regList.innerHTML = regs.length === 0
+        ? '<p class="profile-empty">No registered events. <a href="events.html">Browse events</a></p>'
+        : '';
+      regs.forEach(function (id) {
+        const row = document.createElement('div');
+        row.className = 'profile-list-item';
+        row.innerHTML = '<span>' + (EVENT_MAP[id] || id) + '</span>';
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'btn btn-outline btn-sm';
         btn.textContent = 'Cancel Registration';
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', function () {
           UH.cancelRegistration(id);
           renderProfile();
           if (UnityHub.showToast) UnityHub.showToast('Registration cancelled.');
@@ -152,51 +293,113 @@
       });
 
       const borrowList = document.getElementById('borrow-requests-list');
-      const borrows = UH.getBorrowRequests();
       borrowList.innerHTML = borrows.length === 0
-        ? '<p style="color:var(--text-secondary);font-size:0.9rem;">No borrow requests yet.</p>'
+        ? '<p class="profile-empty">No borrow requests yet. <a href="resources.html">Browse resources</a></p>'
         : '';
-      borrows.forEach((b) => {
+      borrows.forEach(function (b) {
         const row = document.createElement('div');
         row.className = 'profile-list-item';
         const badgeClass = b.status === 'approved' ? 'badge-available' : 'badge-pending';
         const badgeLabel = b.status === 'approved' ? 'Approved' : 'Pending';
-        row.innerHTML = `
-          <div>
-            <strong style="font-size:0.9rem;">${b.resourceName}</strong>
-            <p style="font-size:0.8rem;color:var(--text-muted);">${b.org} · ${b.requestedAt}</p>
-          </div>
-          <span class="badge ${badgeClass}">${badgeLabel}</span>
-        `;
+        row.innerHTML = '<div><strong style="font-size:0.9rem;">' + b.resourceName + '</strong><p style="font-size:0.8rem;color:var(--text-muted);">' + b.org + ' · ' + b.requestedAt + '</p></div><span class="badge ' + badgeClass + '">' + badgeLabel + '</span>';
         borrowList.appendChild(row);
       });
     }
 
-    const editBtn = document.getElementById('edit-profile-btn');
-    const editForm = document.getElementById('profile-edit-form');
+    // Inline edit: convert hero display into inline inputs for quick edit
+    function beginInlineEdit() {
+      const user = UH.ensureProfileFields(UH.getCurrentUser());
+      // hide separate edit form if present
+      document.getElementById('profile-edit-form').classList.remove('visible');
+      // Replace display fields with inputs
+      const nameEl = document.getElementById('profile-name');
+      nameEl.innerHTML = '<input id="inline-name" value="' + (user.name || '') + '" style="font-size:1.5rem;padding:6px;border:1px solid var(--border);border-radius:6px;">';
+      const roleEl = document.getElementById('profile-role');
+      roleEl.innerHTML = '<select id="inline-role" style="padding:4px;border:1px solid var(--border);border-radius:6px;font-size:0.9rem;"><option>Student</option><option>Student Organization</option><option>NSTP/CWTS Member</option><option>Community Volunteer</option></select>';
+      document.getElementById('inline-role').value = user.role || 'Student';
+      // contact fields inline
+      const phoneEl = document.getElementById('profile-phone');
+      phoneEl.innerHTML = '<input id="inline-phone" value="' + (user.phone || '') + '" style="padding:4px;border:1px solid var(--border);border-radius:6px;">';
+      const locEl = document.getElementById('profile-location');
+      locEl.innerHTML = '<input id="inline-location" value="' + (user.location || '') + '" style="padding:4px;border:1px solid var(--border);border-radius:6px;">';
+      // bio
+      const bioEl = document.getElementById('profile-bio');
+      bioEl.innerHTML = '<textarea id="inline-bio" rows="3" style="width:100%;padding:0.5rem;border:1.5px solid var(--border);border-radius:var(--radius-md);font-family:inherit;font-size:0.9rem;">' + (user.bio || '') + '</textarea>';
 
-    editBtn.addEventListener('click', () => {
-      const user = UH.getCurrentUser();
-      document.getElementById('edit-name').value = user.name;
-      document.getElementById('edit-email').value = user.email;
-      document.getElementById('edit-role').value = user.role;
-      editForm.classList.add('visible');
+      // swap edit button for inline actions
+      const heroCard = document.querySelector('.profile-hero-card');
+      const editBtn = document.getElementById('edit-profile-btn');
+      editBtn.style.display = 'none';
+      const saveBtn = document.createElement('button');
+      saveBtn.type = 'button';
+      saveBtn.id = 'save-profile-inline';
+      saveBtn.className = 'btn btn-primary';
+      saveBtn.textContent = 'Save';
+      const cancelBtn = document.createElement('button');
+      cancelBtn.type = 'button';
+      cancelBtn.id = 'cancel-profile-inline';
+      cancelBtn.className = 'btn btn-outline';
+      cancelBtn.textContent = 'Cancel';
+      heroCard.appendChild(saveBtn);
+      heroCard.appendChild(cancelBtn);
+
+      saveBtn.addEventListener('click', saveInlineEdit);
+      cancelBtn.addEventListener('click', cancelInlineEdit);
+    }
+
+    function cancelInlineEdit() {
+      // restore display by re-rendering profile
+      renderProfile();
+      const editBtn = document.getElementById('edit-profile-btn');
+      if (editBtn) editBtn.style.display = '';
+      const inlineSave = document.getElementById('save-profile-inline');
+      const inlineCancel = document.getElementById('cancel-profile-inline');
+      if (inlineSave) inlineSave.remove();
+      if (inlineCancel) inlineCancel.remove();
+    }
+
+    function saveInlineEdit() {
+      const name = document.getElementById('inline-name').value.trim();
+      const role = document.getElementById('inline-role').value;
+      const phone = document.getElementById('inline-phone').value.trim();
+      const location = document.getElementById('inline-location').value.trim();
+      const bio = document.getElementById('inline-bio').value.trim();
+      UH.updateUser({ name: name, role: role, phone: phone, location: location, bio: bio });
+      // cleanup inline controls
+      const inlineSave = document.getElementById('save-profile-inline');
+      const inlineCancel = document.getElementById('cancel-profile-inline');
+      if (inlineSave) inlineSave.remove();
+      if (inlineCancel) inlineCancel.remove();
+      const editBtn = document.getElementById('edit-profile-btn');
+      if (editBtn) editBtn.style.display = '';
+      renderProfile();
+      document.querySelectorAll('.user-name').forEach(function (el) { el.textContent = UH.getCurrentUser().name; });
+      document.querySelectorAll('.user-role').forEach(function (el) { el.textContent = UH.getCurrentUser().role; });
+      if (UnityHub.showToast) UnityHub.showToast('Profile updated successfully', 'success');
+    }
+
+    document.getElementById('edit-profile-btn').addEventListener('click', function () {
+      beginInlineEdit();
     });
 
-    document.getElementById('cancel-profile').addEventListener('click', () => {
-      editForm.classList.remove('visible');
+    // keep existing form-based handlers available as fallback
+    document.getElementById('cancel-profile').addEventListener('click', function () {
+      document.getElementById('profile-edit-form').classList.remove('visible');
     });
 
-    document.getElementById('save-profile').addEventListener('click', () => {
+    document.getElementById('save-profile').addEventListener('click', function () {
       UH.updateUser({
         name: document.getElementById('edit-name').value.trim(),
         role: document.getElementById('edit-role').value,
+        phone: document.getElementById('edit-phone').value.trim(),
+        location: document.getElementById('edit-location').value.trim(),
+        bio: document.getElementById('edit-bio').value.trim(),
       });
-      editForm.classList.remove('visible');
+      document.getElementById('profile-edit-form').classList.remove('visible');
       renderProfile();
       const user = UH.getCurrentUser();
-      document.querySelectorAll('.user-name').forEach((el) => { el.textContent = user.name; });
-      document.querySelectorAll('.user-role').forEach((el) => { el.textContent = user.role; });
+      document.querySelectorAll('.user-name').forEach(function (el) { el.textContent = user.name; });
+      document.querySelectorAll('.user-role').forEach(function (el) { el.textContent = user.role; });
       if (UnityHub.showToast) UnityHub.showToast('Profile updated successfully', 'success');
     });
 

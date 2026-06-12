@@ -19,7 +19,7 @@
         <a href="events.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/></svg> Events</a>
         <a href="resources.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg> Resources</a>
         <a href="organization.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> Organizations</a>
-        <a href="#" class="nav-item nav-item-messages"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> Messages</a>
+        <a href="messages.html" class="nav-item nav-item-messages"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> Messages</a>
         <a href="notifications.html" class="nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg> Notifications</a>
         <a href="profile.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Profile</a>
         <a href="settings.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/></svg> Settings</a>
@@ -32,14 +32,14 @@
     <div class="main-wrapper">
       <header class="topbar">
         <button type="button" class="menu-toggle" aria-label="Open menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/></svg></button>
-        <div class="search-bar">
+        <div class="search-bar" role="search">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/></svg>
           <input type="search" id="global-search" placeholder="Search for events, organizations, or resources...">
         </div>
         <div class="topbar-actions">
           <a href="notifications.html" class="btn-icon" aria-label="Notifications" style="position:relative;text-decoration:none;">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>
-            <span class="notification-dot"></span>
+            <span class="notification-dot" aria-hidden="true"></span>
           </a>
           <a href="profile.html" class="user-profile" style="text-decoration:none;">
             <img src="" alt="" class="user-avatar">
@@ -56,6 +56,18 @@
           </header>
           <button type="button" class="btn btn-outline btn-sm" id="mark-all-read">Mark all as read</button>
         </div>
+
+        <div class="notif-filter-tabs" role="tablist" aria-label="Filter notifications">
+          <button class="notif-tab active" data-filter="all" role="tab" aria-selected="true">All</button>
+          <button class="notif-tab" data-filter="unread" role="tab" aria-selected="false">
+            Unread
+            <span class="notif-tab-count" id="unread-tab-count"></span>
+          </button>
+          <button class="notif-tab" data-filter="event" role="tab" aria-selected="false">Events</button>
+          <button class="notif-tab" data-filter="resource" role="tab" aria-selected="false">Resources</button>
+          <button class="notif-tab" data-filter="org" role="tab" aria-selected="false">Organizations</button>
+        </div>
+
         <div id="notifications-list"></div>
         <div id="notifications-empty" class="empty-state" style="display:none;">
           <h3>No notifications</h3>
@@ -65,12 +77,24 @@
     </div>
   </div>
 
+  <button type="button" class="scroll-top-btn" id="scroll-top" aria-label="Scroll to top" style="display:none;">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <polyline points="18 15 12 9 6 15"/>
+    </svg>
+  </button>
+
   <script src="js/ui-icons.js"></script>
   <script src="js/events-data.js"></script>
   <script src="js/storage.js"></script>
   <script src="js/ui-enhancements.js"></script>
   <script src="js/app.js"></script>
   <script>
+    const iconMap = {
+      event: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+      resource: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>',
+      org: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>',
+    };
+
     function renderNotifications() {
       const list = document.getElementById('notifications-list');
       const empty = document.getElementById('notifications-empty');
@@ -82,11 +106,13 @@
       }
       empty.style.display = 'none';
       items.forEach((n) => {
+        const type = n.type || (n.icon === '📅' ? 'event' : n.icon === '📦' ? 'resource' : 'org');
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'notif-page-item' + (n.read ? '' : ' unread');
+        btn.dataset.type = type;
         btn.innerHTML = `
-          <div class="notif-icon-wrap">${n.icon || '🔔'}</div>
+          <div class="notif-icon-wrap" data-type="${type}" aria-hidden="true">${iconMap[type] || iconMap.org}</div>
           <div class="notif-body"><strong>${n.title}</strong><p>${n.body}</p></div>
           <span class="notif-time">${n.time}</span>
         `;
@@ -97,6 +123,10 @@
         });
         list.appendChild(btn);
       });
+
+      const unreadCount = UH.getUnreadCount();
+      const countEl = document.getElementById('unread-tab-count');
+      if (countEl) countEl.textContent = unreadCount > 0 ? unreadCount : '';
     }
 
     document.getElementById('mark-all-read').addEventListener('click', () => {
@@ -107,6 +137,26 @@
     });
 
     renderNotifications();
+
+    document.querySelectorAll('.notif-tab').forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        document.querySelectorAll('.notif-tab').forEach(function (t) {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        var filter = tab.dataset.filter;
+        document.querySelectorAll('.notif-page-item').forEach(function (item) {
+          if (filter === 'all') { item.style.display = ''; return; }
+          if (filter === 'unread') {
+            item.style.display = item.classList.contains('unread') ? '' : 'none';
+            return;
+          }
+          item.style.display = item.dataset.type === filter ? '' : 'none';
+        });
+      });
+    });
   </script>
 </body>
 </html>

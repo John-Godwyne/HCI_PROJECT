@@ -31,7 +31,15 @@ const UH = {
     const accounts = this.getAccounts();
     const idx = accounts.findIndex((a) => a.email === user.email);
     if (idx !== -1) {
-      accounts[idx] = { ...accounts[idx], name: updated.name, role: updated.role };
+      accounts[idx] = {
+        ...accounts[idx],
+        name: updated.name,
+        role: updated.role,
+        phone: updated.phone,
+        location: updated.location,
+        bio: updated.bio,
+        avatar: updated.avatar,
+      };
       this.saveAccounts(accounts);
     }
   },
@@ -127,12 +135,48 @@ const UH = {
       emailEvents: true,
       eventReminders: true,
       resourceUpdates: true,
+      pushNotifications: true,
+      profileVisible: true,
+      showActivity: true,
+      language: 'en',
+      timezone: 'Asia/Manila',
+      theme: 'light',
     };
     const stored = localStorage.getItem('uh_settings');
     return stored ? { ...defaults, ...JSON.parse(stored) } : defaults;
   },
   saveSettings(settings) {
-    localStorage.setItem('uh_settings', JSON.stringify(settings));
+    const current = this.getSettings();
+    localStorage.setItem('uh_settings', JSON.stringify({ ...current, ...settings }));
+  },
+
+  // ── Following organizations ─────────────────────────
+  getFollowing() {
+    return JSON.parse(localStorage.getItem('uh_following') || '[]');
+  },
+  isFollowing(orgId) {
+    return this.getFollowing().includes(orgId);
+  },
+  toggleFollowing(orgId) {
+    const list = this.getFollowing();
+    const idx = list.indexOf(orgId);
+    if (idx === -1) list.push(orgId);
+    else list.splice(idx, 1);
+    localStorage.setItem('uh_following', JSON.stringify(list));
+    return idx === -1;
+  },
+
+  // ── User profile defaults ───────────────────────────
+  ensureProfileFields(user) {
+    const defaults = {
+      phone: '',
+      location: 'Quezon City, Philippines',
+      bio: '',
+      interests: ['Environment', 'Education', 'Community', 'Health'],
+      joinedAt: 'January 2026',
+      volunteerHours: 12,
+    };
+    return { ...defaults, ...user };
   },
 };
 

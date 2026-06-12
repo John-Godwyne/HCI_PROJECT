@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Messages | UnityHub</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div class="sidebar-overlay"></div>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <div class="sidebar-logo">
+        <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" fill="#E8EAF6"/><circle cx="16" cy="20" r="6" fill="#3F51B5"/><circle cx="32" cy="20" r="6" fill="#5C6BC0"/><circle cx="24" cy="32" r="6" fill="#7986CB"/></svg>
+        <div><span>UnityHub</span><span class="sidebar-tagline">Connect. Collaborate. Create Impact.</span></div>
+      </div>
+      <nav class="sidebar-nav"></nav>
+      <div class="sidebar-footer"><button type="button" class="btn-logout">Logout</button></div>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="topbar">
+        <button type="button" class="menu-toggle" aria-label="Open menu">☰</button>
+        <div class="search-bar" role="search">
+          <input type="search" id="global-search" placeholder="Search for events, organizations, or resources..." aria-label="Global search">
+        </div>
+        <div class="topbar-actions">
+          <a href="notifications.html" class="btn-icon" aria-label="Notifications" style="position:relative;text-decoration:none;"></a>
+          <a href="profile.html" class="user-profile" style="text-decoration:none;"> 
+            <img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ccircle cx='40' cy='40' r='38' fill='%23E8EAF6'/%3E%3Ctext x='50%25' y='55%25' font-size='28' text-anchor='middle' fill='%233F51B5' font-family='Arial,sans-serif'%3EU%3C/text%3E%3C/svg%3E" alt="User avatar" class="user-avatar" width="40" height="40">
+            <div class="user-info"><span class="user-name">User</span><span class="user-role">Role</span></div>
+          </a>
+        </div>
+      </header>
+
+      <main id="main-content" class="main-content">
+        <div class="card" style="text-align:center;padding:4rem;">
+          <h1>Messages coming soon!</h1>
+          <p>We're building a better way for you to connect with organizations and collaborators. Stay tuned.</p>
+          <a href="index.html" class="btn btn-primary" style="margin-top:1rem;">Back to Dashboard</a>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/ui-icons.js"></script>
+  <script src="js/events-data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/ui-enhancements.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

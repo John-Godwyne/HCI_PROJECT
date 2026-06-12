@@ -69,15 +69,17 @@
 
     const user = UH.getCurrentUser();
     const first = (user && user.name && user.name.split(' ')[0]) || 'Volunteer';
-    title.textContent = 'Hello, ' + first + '! 👋';
+    const hour = new Date().getHours();
+    const timeGreet = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+    title.textContent = timeGreet + ', ' + first + '! 👋';
 
     const eventsEl = document.getElementById('impact-events-count');
     const savedEl = document.getElementById('impact-resources-count');
-    const orgsEl = document.getElementById('impact-orgs-count');
+    const borrowsEl = document.getElementById('impact-borrows-count');
 
     if (eventsEl) eventsEl.textContent = String(UH.getRegistrations().length || 0);
     if (savedEl) savedEl.textContent = String(UH.getSaved().length || 0);
-    if (orgsEl) orgsEl.textContent = '3';
+    if (borrowsEl) borrowsEl.textContent = String(UH.getBorrowRequests().length || 0);
   }
 
   function enhanceEmptyStates() {
