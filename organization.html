@@ -232,46 +232,60 @@
               </aside>
             </div>
           </div>
-        </div>
 
-        <div id="tab-projects" class="tab-panel" role="tabpanel">
-          <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem;">
-            <li class="card" style="padding: 1rem;">
-              <a href="event-detail.html?id=event-coastal">
-              <strong>Coastal Clean-up Drive 2026</strong>
-              <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.25rem;">Ongoing · Baywalk, Manila</p>
-              </a>
-            </li>
-            <li class="card" style="padding: 1rem;">
-              
-              <strong>Campus Recycling Program</strong>
-              <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.25rem;">Active · University grounds</p>
-            
-            </li>
-            <li class="card" style="padding: 1rem;">
-              <a href="event-detail.html?id=event-tree">
-              <strong>Tree Planting Initiative</strong>
-              <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.25rem;">Upcoming · La Mesa Eco Park</p>
-              </a>
-            </li>
-          </ul>
-        </div>
+          <!-- IT Society -->
+          <div class="org-profile-panel" data-org-panel="it-society" data-org-id="it-society" style="display:none;">
+            <div class="card org-hero-card">
+              <div class="org-hero-inner">
+                <div class="org-hero-identity">
+                  <div class="org-hero-logo" style="background:#EEF2FF;color:#3730A3;"><img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=96&h=96&fit=crop"></div>
+                  <div>
+                    <div class="org-name-row"><h1>IT Society</h1><span class="verified-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Verified</span></div>
+                    <p class="org-hero-tagline">Tech workshops, digital literacy programs, and equipment sharing for the campus community.</p>
+                    <div class="org-hero-meta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Campus, Quezon City</span></div>
+                  </div>
+                </div>
+                <div class="org-hero-aside">
+                  <div class="org-hero-stats">
+                    <div class="org-stat-block"><strong>85</strong><span>Members</span></div>
+                    <div class="org-stat-block"><strong>8</strong><span>Projects</span></div>
+                    <div class="org-stat-block"><strong>5</strong><span>Partnerships</span></div>
+                  </div>
+                  <button type="button" class="btn btn-primary btn-follow" data-org-id="it-society" data-action="follow">Follow</button>
+                </div>
+              </div>
+            </div>
+            <div class="tabs" role="tablist">
+              <button type="button" class="tab active" data-tab="is-about">About</button>
+              <button type="button" class="tab" data-tab="is-projects">Projects</button>
+              <button type="button" class="tab" data-tab="is-resources">Resources</button>
+            </div>
+            <div class="org-content-grid" data-org-grid="it-society">
+              <div class="org-main-col">
+                <div id="is-about" class="tab-panel active"><div class="content-section"><h2>About</h2><p class="about-text">The IT Society organizes digital literacy workshops, coding bootcamps, and technology outreach programs. We manage shared equipment like projectors and computers for academic and community events.</p></div><div class="content-section"><h2>Our Focus Areas</h2><div class="tag-row"><span class="tag tag-education">Digital Literacy</span><span class="tag tag-education">Technology</span><span class="tag tag-community">Community Outreach</span></div></div></div>
+                <div id="is-projects" class="tab-panel"><div class="org-project-card"><div><strong>Digital Literacy Workshop</strong><p>Upcoming · Jun 20 · Barangay Hall, QC</p></div></div><div class="org-project-card"><div><strong>Campus Tech Fair 2026</strong><p>Planning · University Gymnasium</p></div></div></div>
+                <div id="is-resources" class="tab-panel"><div class="resources-grid"><article class="resource-card"><a href="resource-detail.html?id=res-projector"><div class="resource-card-image"><img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=400&h=260&fit=crop" alt="HD Projector"></div><div class="resource-card-body"><div class="resource-card-top"><span class="tag tag-equipment">Equipment</span><span class="badge badge-available">Available</span></div><h3>HD Projector</h3></div></a></article></div></div>
+              </div>
+              <aside class="org-sidebar-col"><div class="card org-sidebar-card"><h3>Recent Projects</h3><ul class="org-project-list"><li class="org-project-item"><div class="org-project-icon" style="background:#EEF2FF;color:#3730A3;">💻</div><div><strong>Digital Literacy</strong><span>Jun 20, 2026</span></div></li></ul></div></aside>
+            </div>
+          </div>
 
-        <div id="tab-resources" class="tab-panel" role="tabpanel">
-          <div class="resources-grid" style="margin-top: 0;">
-            <article class="resource-card">
-              <div class="resource-card-image">
-                <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&h=260&fit=crop" alt="">
-              </div>
-              <div class="resource-card-body">
-                <h3>Cleaning Materials</h3>
-                <p class="resource-from">From: Eco Warriors</p>
-                <span class="badge badge-available">Available</span>
-              </div>
-            </article>
-            <article class="resource-card">
-              <div class="resource-card-image">
-                <img src="https://i.ebayimg.com/images/g/UacAAeSwiEZowt99/s-l1200.webp" alt="">
+          <!-- Health Alliance -->
+          <div class="org-profile-panel" data-org-panel="health-alliance" data-org-id="health-alliance" style="display:none;">
+            <div class="card org-hero-card">
+              <div class="org-hero-inner">
+                <div class="org-hero-identity">
+                  <div class="org-hero-logo" style="background:#FEE2E2;color:#991B1B;">HA</div>
+                  <div>
+                    <div class="org-name-row"><h1>Health Alliance</h1><span class="verified-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Verified</span></div>
+                    <p class="org-hero-tagline">Free medical missions, health fairs, and wellness programs for students and communities.</p>
+                    <div class="org-hero-meta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Campus, Quezon City</span></div>
+                  </div>
+                </div>
+                <div class="org-hero-aside">
+                  <div class="org-hero-stats"><div class="org-stat-block"><strong>60</strong><span>Volunteers</span></div><div class="org-stat-block"><strong>10</strong><span>Projects</span></div><div class="org-stat-block"><strong>4</strong><span>Partnerships</span></div></div>
+                  <button type="button" class="btn btn-primary btn-follow" data-org-id="health-alliance" data-action="follow">Follow</button>
+                </div>
               </div>
             </div>
             <div class="tabs" role="tablist"><button type="button" class="tab active" data-tab="ha-about">About</button><button type="button" class="tab" data-tab="ha-projects">Projects</button></div>
