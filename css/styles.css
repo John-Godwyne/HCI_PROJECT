@@ -2772,3 +2772,29 @@
 .resource-card-image {
   position: relative;
 }
+
+.hero-photos {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.hero-photo-item{
+  border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,.15);
+}
+.hero-photo-item:hover {
+    transform: translateY(-4px);
+    transition: .3s ease;
+}
+.hero-photo-item img {
+    width: 300px;
+    height: 190px;
+    object-fit: cover;
+    display: block;
+  
+  }
